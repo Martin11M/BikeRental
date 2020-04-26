@@ -8,7 +8,7 @@ export class LoginService {
   headers: HttpHeaders;
 
   constructor(private http: HttpClient) {
-    this.url = 'http://apsi-bike-rental.herokuapp.com/';
+    this.url = 'https://apsi-bike-rental.herokuapp.com/';
     this.headers = new HttpHeaders({
       'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
