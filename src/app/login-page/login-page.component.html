@@ -1,0 +1,26 @@
+<div class="container login">
+  <h1>Bike Rental Log In</h1>
+  <form [formGroup]="loginForm">
+    <div *ngIf="!loading">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input class="form-control" formControlName="login" placeholder="Username"
+          [ngClass]="{'is-invalid':loginForm.get('login').touched && loginForm.get('login').invalid }">
+        <div *ngIf="loginForm.get('login').touched && loginForm.get('login').invalid">
+          <p class="invalid-feedback">Username is required!</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" formControlName="password" placeholder="Password"
+          [ngClass]="{'is-invalid':loginForm.get('password').touched && loginForm.get('password').invalid }">
+        <div *ngIf="loginForm.get('password').touched && loginForm.get('password').invalid">
+          <p class="invalid-feedback">Password is required!</p>
+        </div>
+      </div>
+      <button [disabled]="!loginForm.valid" (click)="logUser()" class="btn btn-primary">Log in</button>
+    </div>
+    <div *ngIf="loading">loading...</div>
+  </form>
+  <div *ngIf="error" class="error-text invalid-feedback">Your username or password was entered incorrectly!</div>
+</div>
