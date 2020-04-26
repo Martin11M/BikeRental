@@ -19,8 +19,8 @@ export class LoginPageComponent implements OnInit {
     this.loading = false;
     this.error = false;
     this.loginForm = this.fb.group({
-      login: ['admin1', Validators.required],
-      password: ['123', Validators.required],
+      login: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
