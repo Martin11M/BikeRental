@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../app.component';
 
 @Component({
   selector: 'app-admin-page',
@@ -6,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-page.component.scss']
 })
 export class AdminPageComponent implements OnInit {
-
+  user:  User;
+  
   constructor() { }
 
   ngOnInit() {
+    this.user = {
+      login: `MyLoginName`,
+      isAdmin: true
+    }
   }
 
+  get login() {
+    return this.user.login;
+  }
+
+  get isAdmin() {
+    return this.user.isAdmin;
+  }
 }

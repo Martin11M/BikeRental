@@ -1,1 +1,18 @@
-<h1>welcome to admin-page!</h1>
+<app-navbar></app-navbar>
+<div class="container-lg padding">
+    <div class="row">
+        <div class="col-sm">
+            <div class="alert alert-primary" role="alert">
+                Welcome user: {{login}}
+            </div>
+            <p *ngIf="isAdmin">
+            Is Admin sth is showing
+            </p>
+
+            <p *ngIf="!isAdmin">
+            Is user sth is showing
+            </p>
+            <app-open-street-map></app-open-street-map>
+        </div>
+    </div>
+</div>
