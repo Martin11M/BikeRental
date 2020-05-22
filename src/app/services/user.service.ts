@@ -1,15 +1,16 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class UserService {
 
   loginForm: FormGroup;
+  data: any;
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      login: ['', Validators.required],
-      password: ['', Validators.required],
+      login: ['admin1', Validators.required],
+      password: ['123', Validators.required],
     });
   }
 

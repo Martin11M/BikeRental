@@ -9,8 +9,3 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'BikeRental';
 }
-
-export interface User {
-  login: string;
-  isAdmin: boolean;  
-}

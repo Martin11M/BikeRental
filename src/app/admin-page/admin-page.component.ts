@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../app.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -7,22 +7,14 @@ import { User } from '../app.component';
   styleUrls: ['./admin-page.component.scss']
 })
 export class AdminPageComponent implements OnInit {
-  user:  User;
-  
-  constructor() { }
+
+  constructor(private user: UserService) { }
 
   ngOnInit() {
-    this.user = {
-      login: `MyLoginName`,
-      isAdmin: true
-    }
+    console.log('nice!');
   }
 
   get login() {
-    return this.user.login;
-  }
-
-  get isAdmin() {
-    return this.user.isAdmin;
+    return this.user.username;
   }
 }
