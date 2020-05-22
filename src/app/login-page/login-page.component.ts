@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { LoginService } from './login-page.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-login-page',
@@ -11,12 +12,14 @@ import { UserService } from '../services/user.service';
 })
 export class LoginPageComponent implements OnInit {
 
+  isLoggedIn$: Observable<boolean>;    
   loading: boolean;
   error: boolean;
 
   constructor(private loginService: LoginService, private router: Router, private user: UserService) {}
 
   ngOnInit() {
+    this.isLoggedIn$ = this.loginService.isLoggedIn;
     this.loading = false;
     this.error = false;
   }
