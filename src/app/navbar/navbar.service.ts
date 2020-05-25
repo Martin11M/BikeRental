@@ -6,12 +6,18 @@ import { NavbarOption } from './navbarOption';
 export class NavbarService {
   constructor(private user: UserService) {}
 
+  adminOptions: NavbarOption[] = [
+    { name: 'Dashboard', path: '/admin-dashboard' },
+    { name: 'Manage users', path: '/manage-users-page' },
+    { name: 'Manage stations', path: '/manage-stations-page' },
+  ] 
+
+  userOptions: NavbarOption[] = [
+    { name: 'Dashboard', path: '/user-dashboard' },
+    { name: 'Rent bike', path: '/rent-page' },
+  ]
+
   getOptions() {
-    return [
-      { name: 'Hello', path: 'world' },
-      { name: 'Hello1', path: 'world' },
-      { name: 'Hello2', path: 'world' },
-    ] as NavbarOption[];
-    // return this.user.data.isAdmin ? ['opcje admina'] : ['opcje usera'];
+    return this.user.data.isAdmin ? this.adminOptions : this.adminOptions;
   }
 }
