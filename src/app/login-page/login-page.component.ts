@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { LoginService } from './login-page.service';
 import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-login-page',
@@ -9,33 +11,28 @@ import { Router } from '@angular/router';
   styleUrls: ['./login-page.component.scss'],
 })
 export class LoginPageComponent implements OnInit {
-  loginForm: FormGroup;
+
+  isLoggedIn$: Observable<boolean>;    
   loading: boolean;
   error: boolean;
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router, private user: UserService) {}
 
   ngOnInit() {
+    this.isLoggedIn$ = this.loginService.isLoggedIn;
     this.loading = false;
     this.error = false;
-    this.loginForm = this.fb.group({
-      login: ['', Validators.required],
-      password: ['', Validators.required],
-    });
   }
 
-  get username() {
-    return this.loginForm.get('login').value;
-  }
-  get password() {
-    return this.loginForm.get('password').value;
+  get loginForm() {
+    return this.user.loginForm as FormGroup;
   }
 
   logUser() {
     this.error = false;
     this.loading = true;
-    this.loginService.logIn(this.username, this.password).subscribe((data) => {
-      console.log('[data]', data.token);
+    this.loginService.logIn(this.user.username, this.user.password).subscribe((data) => {
+      this.user.data = data;
       if (data.token.length > 0) {
         data.admin ? this.router.navigate(['/admin-dashboard']) : this.router.navigate(['/user-dashboard']);
       } else {

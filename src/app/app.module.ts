@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { OpenStreetMapComponent } from './open-street-map/open-street-map.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     LoginPageComponent,
     AdminPageComponent,
     UserPageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    NavbarComponent,
+    OpenStreetMapComponent
   ],
   imports: [
     BrowserModule,

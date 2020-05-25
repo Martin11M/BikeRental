@@ -1,5 +1,7 @@
 <div class="app-container">
-  <!-- <app-login-page class="login"></app-login-page> -->
+  <app-login-page *ngIf="isLoggedIn$ | async">
+    <app-navbar></app-navbar>
+  </app-login-page>
   <router-outlet></router-outlet>
 </div>
 
