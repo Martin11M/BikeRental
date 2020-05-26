@@ -4,7 +4,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav">
         <li *ngFor="let o of navbarOptions" class="nav-item">
-          <a (click)="redirect(o.path)" class="nav-link" href="#">{{o.name}}</a>
+          <a (click)="redirect(o.path)" class="nav-link" role="button">{{o.name}}</a>
         </li>
       </ul>
       <div class="collapse navbar-collapse" id="navbarSupportedContent-4">

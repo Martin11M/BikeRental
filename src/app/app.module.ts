@@ -12,6 +12,9 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { OpenStreetMapComponent } from './open-street-map/open-street-map.component';
+import { ManageUsersPageComponent } from './manage-users-page/manage-users-page.component';
+import { ManageStationsPageComponent } from './manage-stations-page/manage-stations-page.component';
+import { RentPageComponent } from './rent-page/rent-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { OpenStreetMapComponent } from './open-street-map/open-street-map.compon
     UserPageComponent,
     PageNotFoundComponent,
     NavbarComponent,
-    OpenStreetMapComponent
+    OpenStreetMapComponent,
+    ManageUsersPageComponent,
+    ManageStationsPageComponent,
+    RentPageComponent
   ],
   imports: [
     BrowserModule,
