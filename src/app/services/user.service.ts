@@ -12,6 +12,7 @@ export class UserService {
       login: ['admin1', Validators.required],
       password: ['123', Validators.required],
     });
+    this.data = null;
   }
 
   get username() {

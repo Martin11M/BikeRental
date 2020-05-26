@@ -1,17 +1,13 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { UserService } from './services/user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-
 export class AppComponent {
   title = 'BikeRental';
-  router: string;
 
-  constructor(private _router: Router){
-          this.router = _router.url; 
-    }
+  constructor(public user: UserService) {}
 }
