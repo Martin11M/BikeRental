@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ManageUsersService } from './manage-users-page.service';
+import { User } from './user';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-users-page',
@@ -7,9 +10,56 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageUsersPageComponent implements OnInit {
 
-  constructor() { }
+  sortType: string = '';
+  sortReverse: boolean = true;
+  filterForm: FormControl = new FormControl();
+
+  users: User[];
+  filteredUsers: User[];
+
+  constructor(private manageUsersService: ManageUsersService) { }
 
   ngOnInit() {
+    this.users = this.manageUsersService.getUsers();
+    this.filteredUsers = this.users;
   }
 
+  sortUsers(sortProperty: string) {
+    if(sortProperty === '')
+      return;
+
+    switch(sortProperty) {
+      case 'userId': {
+        this.filteredUsers.sort( (a,b) =>
+          (a.userId > b.userId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        break;
+      }
+      case 'login': {
+        this.filteredUsers.sort( (a,b) =>
+          (a.login > b.login) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        break;
+      }
+      case 'email': {
+        this.filteredUsers.sort( (a,b) =>
+          (a.email > b.email) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        break;
+      }
+      case 'phoneNumber': {
+        this.filteredUsers.sort( (a,b) =>
+          (a.phoneNumber > b.phoneNumber) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        break;
+      }
+    }
+  }
+
+  filterUsers(query: string) {
+    if(query)
+      this.filteredUsers = this.users.filter( (elem, ind, arr) =>
+          (elem.userId.includes(query) || elem.login.includes(query) || elem.email.includes(query)
+            || elem.phoneNumber.includes(query)) );
+    else
+      this.filteredUsers = this.users;
+
+    this.sortUsers(this.sortType);
+  }
 }

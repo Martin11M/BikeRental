@@ -15,6 +15,7 @@ import { OpenStreetMapComponent } from './open-street-map/open-street-map.compon
 import { ManageUsersPageComponent } from './manage-users-page/manage-users-page.component';
 import { ManageStationsPageComponent } from './manage-stations-page/manage-stations-page.component';
 import { RentPageComponent } from './rent-page/rent-page.component';
+import { UserItemComponent } from './user-item/user-item.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RentPageComponent } from './rent-page/rent-page.component';
     OpenStreetMapComponent,
     ManageUsersPageComponent,
     ManageStationsPageComponent,
-    RentPageComponent
+    RentPageComponent,
+    UserItemComponent
   ],
   imports: [
     BrowserModule,
