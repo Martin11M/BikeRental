@@ -9,14 +9,25 @@ import { Station } from '../manage-stations-page/station';
 export class StationItemComponent implements OnInit {
 
   @Input() station: Station;
+  isExpanded: boolean
+  expandButtonText: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.isExpanded = false;
+    this.expandButtonText = "Expand station";
   }
 
   removeStation() {
     //TODO
     console.log(`[TODO] Station of id ${this.station.stationId} is to be deleted now.`);
+  }
+
+  expandButtonBehavior() {
+    if(!this.isExpanded)
+      this.expandButtonText = "Collapse station";
+    else
+      this.expandButtonText = "Expand station";
   }
 }

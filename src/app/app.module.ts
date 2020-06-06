@@ -17,6 +17,8 @@ import { ManageStationsPageComponent } from './manage-stations-page/manage-stati
 import { RentPageComponent } from './rent-page/rent-page.component';
 import { UserItemComponent } from './user-item/user-item.component';
 import { StationItemComponent } from './station-item/station-item.component';
+import { BikesSubtableComponent } from './bikes-subtable/bikes-subtable.component';
+import { BikeItemComponent } from './bike-item/bike-item.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { StationItemComponent } from './station-item/station-item.component';
     ManageStationsPageComponent,
     RentPageComponent,
     UserItemComponent,
-    StationItemComponent
+    StationItemComponent,
+    BikesSubtableComponent,
+    BikeItemComponent
   ],
   imports: [
     BrowserModule,

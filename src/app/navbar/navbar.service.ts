@@ -18,6 +18,6 @@ export class NavbarService {
   ];
 
   getOptions() {
-    return this.user.data.isAdmin ? this.adminOptions : this.adminOptions;
+    return this.user.data.isAdmin ? this.adminOptions : this.userOptions;
   }
 }

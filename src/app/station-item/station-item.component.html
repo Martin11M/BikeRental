@@ -2,9 +2,16 @@
   <td class="align-middle col-1">{{station.stationId}}</td>
   <td class="align-middle col-7">{{station.address}}</td>
   <td class="align-middle col-2">
-    <a role="button" class="btn btn-primary" (click)="removeUser()">Expand station</a>
+    <button type="button" class="btn btn-primary" (click)="expandButtonBehavior(); this.isExpanded = !this.isExpanded">
+      {{ expandButtonText }}
+  </button>
   </td>
   <td class="align-middle col-2">
-    <a role="button" class="btn btn-danger" (click)="removeUser()">Remove station</a>
+    <a role="button" class="btn btn-danger" (click)="removeStation()">Remove station</a>
+  </td>
+</tr>
+<tr *ngIf="this.isExpanded">
+  <td colspan="4">
+    <app-bikes-subtable [stationId]="station.stationId"></app-bikes-subtable>
   </td>
 </tr>

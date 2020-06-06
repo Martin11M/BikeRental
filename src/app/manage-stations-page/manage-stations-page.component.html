@@ -11,29 +11,29 @@
 
   <input [formControl]="filterForm" (change)="filterStations(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter stations...">
 
-  <table id="userTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
+  <table id="stationTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
     <thead>
       <tr class="fd-flex">
-        <td class="col-1">
+        <th class="col-1">
           <a role="button" (click)="sortType = 'stationId'; sortReverse = !sortReverse; sortStations('stationId')">
             ID
             <span *ngIf="sortType == 'stationId' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'stationId' && sortReverse" class="fa fa-caret-up"></span>
           </a>
-        </td>
-        <td class="col-7">
+        </th>
+        <th class="col-7">
           <a role="button" (click)="sortType = 'address'; sortReverse = !sortReverse; sortStations('address')">
             Address
             <span *ngIf="sortType == 'address' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'address' && sortReverse" class="fa fa-caret-up"></span>
           </a>
-        </td>
-        <td class="col-2">
+        </th>
+        <th class="col-2">
           Expand
-        </td>
-        <td class="col-2">
+        </th>
+        <th class="col-2">
           Remove
-        </td>
+        </th>
       </tr>
     </thead>
     <tbody>
