@@ -16,6 +16,7 @@ import { ManageUsersPageComponent } from './manage-users-page/manage-users-page.
 import { ManageStationsPageComponent } from './manage-stations-page/manage-stations-page.component';
 import { RentPageComponent } from './rent-page/rent-page.component';
 import { UserItemComponent } from './user-item/user-item.component';
+import { StationItemComponent } from './station-item/station-item.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UserItemComponent } from './user-item/user-item.component';
     ManageUsersPageComponent,
     ManageStationsPageComponent,
     RentPageComponent,
-    UserItemComponent
+    UserItemComponent,
+    StationItemComponent
   ],
   imports: [
     BrowserModule,

@@ -1,9 +1,9 @@
-  <tr>
-    <td class="align-middle">{{user.userId}}</td>
-    <td class="align-middle">{{user.login}}</td>
-    <td class="align-middle">{{user.email}}</td>
-    <td class="align-middle">{{user.phoneNumber}}</td>
-    <td class="align-middle">
+  <tr  class="d-flex">
+    <td class="align-middle col-1">{{user.userId}}</td>
+    <td class="align-middle col-3">{{user.login}}</td>
+    <td class="align-middle col-4">{{user.email}}</td>
+    <td class="align-middle col-2">{{user.phoneNumber}}</td>
+    <td class="align-middle col-2">
       <a role="button" class="btn btn-danger" (click)="removeUser()">Remove user</a>
     </td>
   </tr>

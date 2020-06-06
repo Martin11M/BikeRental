@@ -13,36 +13,36 @@
 
   <table id="userTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
     <thead>
-      <tr>
-        <td class="th-sm">
+      <tr class="d-flex">
+        <td class="col-1">
           <a role="button" (click)="sortType = 'userId'; sortReverse = !sortReverse; sortUsers('userId')">
             ID
             <span *ngIf="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
-        <td class="th-sm">
+        <td class="col-3">
           <a role="button" (click)="sortType = 'login'; sortReverse = !sortReverse; sortUsers('login')">
             Login
             <span *ngIf="sortType == 'login' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'login' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
-        <td class="th-sm">
+        <td class="col-4">
           <a role="button" (click)="sortType = 'email'; sortReverse = !sortReverse; sortUsers('email')">
             Email
             <span *ngIf="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
-        <td class="th-sm">
+        <td class="col-2">
           <a role="button" (click)="sortType = 'phoneNumber'; sortReverse = !sortReverse; sortUsers('phoneNumber')">
             Phone number
             <span *ngIf="sortType == 'phoneNumber' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'phoneNumber' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </td>
-        <td>
+        <td class="col-2">
           Remove
         </td>
       </tr>
