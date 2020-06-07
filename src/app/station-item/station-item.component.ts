@@ -20,7 +20,8 @@ export class StationItemComponent implements OnInit {
   }
 
   removeStation() {
-    //TODO
+    //TODO - connect to backend
+    // the corresponding station should be marked as deleted
     console.log(`[TODO] Station of id ${this.station.stationId} is to be deleted now.`);
   }
 

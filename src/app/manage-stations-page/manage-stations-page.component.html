@@ -2,13 +2,6 @@
   <h1>Stations</h1>
   <h2 class="pb-4">Total: {{stations.length}}</h2>
 
-  <!-- <div class="alert alert-info">
-    <h4>DEBUG</h4>
-    <p>Sort Type: {{ sortType }}</p>
-    <p>Sort Reverse: {{ sortReverse }}</p>
-    <p>Search Query: {{ filterForm.value }}</p>
-  </div> -->
-
   <input [formControl]="filterForm" (change)="filterStations(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter stations...">
 
   <table id="stationTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">

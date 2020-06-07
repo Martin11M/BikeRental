@@ -9,7 +9,9 @@ export class ManageStationsService {
   constructor() { }
 
   getStations(): Station[] {
-    // TODO
+    // TODO - connect to backend
+    // stations data should be pulled from database
+
     let tempUsers: Station[] = [
       { 
         "stationId": 1,

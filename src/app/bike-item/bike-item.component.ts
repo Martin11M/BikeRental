@@ -16,7 +16,8 @@ export class BikeItemComponent implements OnInit {
   }
 
   removeBike() {
-    //TODO
+    //TODO - connect to backend
+    // the corresponding bike should be flagged as REMOVED in the database
     console.log(`[TODO] Bike of id ${this.bike.bikeId} is to be deleted now.`);
   }
 }

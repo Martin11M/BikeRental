@@ -2,13 +2,6 @@
   <h1>Active users</h1>
   <h2 class="pb-4">Total: {{users.length}}</h2>
 
-  <!-- <div class="alert alert-info">
-    <h4>DEBUG</h4>
-    <p>Sort Type: {{ sortType }}</p>
-    <p>Sort Reverse: {{ sortReverse }}</p>
-    <p>Search Query: {{ filterForm.value }}</p>
-  </div> -->
-
   <input [formControl]="filterForm" (change)="filterUsers(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter users...">
 
   <table id="userTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">

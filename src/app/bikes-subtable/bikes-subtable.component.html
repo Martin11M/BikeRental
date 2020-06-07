@@ -1,13 +1,5 @@
 <div class="container text-center">
 
-  <!-- <div class="alert alert-info">
-    <h4>DEBUG</h4>
-    <p>Station ID: {{ stationId }}</p>
-    <p>Sort Type: {{ sortType }}</p>
-    <p>Sort Reverse: {{ sortReverse }}</p>
-    <p>Search Query: {{ filterForm.value }}</p>
-  </div> -->
-
   <input [formControl]="filterForm" (change)="filterBikes(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter bikes...">
 
   <table id="bikeTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">

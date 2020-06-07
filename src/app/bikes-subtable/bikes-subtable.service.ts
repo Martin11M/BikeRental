@@ -9,7 +9,9 @@ export class BikesSubtableService {
   constructor() { }
 
   getBikes(stationId: string): Bike[] {
-    // TODO
+    // TODO - connect to backend
+    // bike data should be pulled from the database
+
     let tempUsers: Bike[] = [
       { 
         bikeId: 1,
