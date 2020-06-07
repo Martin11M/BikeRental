@@ -1,0 +1,50 @@
+<div class="text-left">Rental history:</div>
+<input [formControl]="filterForm" (ngModelChange)="filterRentals(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter rentals...">
+
+<table id="rentHistory" class="table table-striped table-dark">
+  <thead>
+  <tr>
+  <tr>
+    <th class="th-sm">
+      <a role="button" (click)="sortType = 'userId'; sortReverse = !sortReverse; sortRentals('rentalId')">
+        ID
+        <span *ngIf="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>
+      </a>
+    </th>
+    <th class="th-sm">
+      <a role="button" (click)="sortType = 'userId'; sortReverse = !sortReverse; sortRentals('bikeName')">
+        Bike name
+        <span *ngIf="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>
+      </a>
+    </th>
+    <th class="th-sm">
+      <a role="button" (click)="sortType = 'login'; sortReverse = !sortReverse; sortRentals('rentalDate')">
+        Rental date
+        <span *ngIf="sortType == 'login' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'login' && sortReverse" class="fa fa-caret-up"></span>
+      </a>
+    </th>
+    <th class="th-sm">
+      <a role="button" (click)="sortType = 'email'; sortReverse = !sortReverse; sortRentals('returnDate')">
+        Return date
+        <span *ngIf="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+      </a>
+    </th>
+    <th class="th-sm">
+      <a role="button" (click)="sortType = 'phoneNumber'; sortReverse = !sortReverse; sortRentals('price')">
+        Price
+        <span *ngIf="sortType == 'phoneNumber' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'phoneNumber' && sortReverse" class="fa fa-caret-up"></span>
+      </a>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <app-rental-history-item style="display: contents;" *ngFor="let rental of filteredRentals" [rental]="rental">
+  </app-rental-history-item>
+  </tbody>
+</table>
+

@@ -16,6 +16,13 @@ import { ManageUsersPageComponent } from './manage-users-page/manage-users-page.
 import { ManageStationsPageComponent } from './manage-stations-page/manage-stations-page.component';
 import { RentPageComponent } from './rent-page/rent-page.component';
 import { UserItemComponent } from './user-item/user-item.component';
+import { UserAccountPageComponent } from './user-account-page/user-account-page.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserStatisticsComponent } from './user-statistics/user-statistics.component';
+import { UserStatisticsItemComponent } from './user-statistics-item/user-statistics-item.component';
+import { RentalHistoryComponent } from './rental-history/rental-history.component';
+import { RentalHistoryItemComponent } from './rental-history-item/rental-history-item.component';
+import {CurrencyPipe, DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -29,7 +36,13 @@ import { UserItemComponent } from './user-item/user-item.component';
     ManageUsersPageComponent,
     ManageStationsPageComponent,
     RentPageComponent,
-    UserItemComponent
+    UserItemComponent,
+    UserAccountPageComponent,
+    UserDetailsComponent,
+    UserStatisticsComponent,
+    UserStatisticsItemComponent,
+    RentalHistoryComponent,
+    RentalHistoryItemComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +51,7 @@ import { UserItemComponent } from './user-item/user-item.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [DatePipe, CurrencyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

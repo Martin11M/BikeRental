@@ -3,7 +3,7 @@
     <td class="align-middle">{{user.login}}</td>
     <td class="align-middle">{{user.email}}</td>
     <td class="align-middle">{{user.phoneNumber}}</td>
-    <td class="align-middle">
+    <td *ngIf="removalPossible" class="align-middle">
       <a role="button" class="btn btn-danger" (click)="removeUser()">Remove user</a>
     </td>
   </tr>
