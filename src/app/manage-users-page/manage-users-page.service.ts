@@ -14,7 +14,9 @@ export class ManageUsersService {
   }
 
   getUsers(): User[] {
-    // TODO
+    // TODO - connect to backend
+    // user data should be pulled from database
+
     let tempUsers: User[] = [
       { 
         "userId": "3",
