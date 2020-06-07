@@ -7,6 +7,7 @@ import { ManageUsersPageComponent } from './manage-users-page/manage-users-page.
 import { ManageStationsPageComponent } from './manage-stations-page/manage-stations-page.component';
 import { RentPageComponent } from './rent-page/rent-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import {UserAccountPageComponent} from './user-account-page/user-account-page.component';
 
 const routes: Routes = [
   {path: '' , component: LoginPageComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'manage-users-page', component: ManageUsersPageComponent},
   {path: 'manage-stations-page', component: ManageStationsPageComponent},
   {path: 'rent-page', component: RentPageComponent},
+  {path: 'user-account-page', component: UserAccountPageComponent},
   {path: '**' , component: PageNotFoundComponent},
 ];
 

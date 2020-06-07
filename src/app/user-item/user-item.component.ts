@@ -9,6 +9,7 @@ import { User } from '../manage-users-page/user';
 export class UserItemComponent implements OnInit {
 
   @Input() user: User;
+  @Input() removalPossible = true;
 
   constructor() { }
 
