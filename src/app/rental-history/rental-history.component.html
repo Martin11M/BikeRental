@@ -3,41 +3,40 @@
 
 <table id="rentHistory" class="table table-striped table-dark">
   <thead>
-  <tr>
-  <tr>
-    <th class="th-sm">
-      <a role="button" (click)="sortType = 'userId'; sortReverse = !sortReverse; sortRentals('rentalId')">
+  <tr class="d-flex">
+    <th class="col-1">
+      <a role="button" (click)="sortType = 'rentalId'; sortReverse = !sortReverse; sortRentals('rentalId')">
         ID
-        <span *ngIf="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
-        <span *ngIf="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>
+        <span *ngIf="sortType == 'rentalId' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'rentalId' && sortReverse" class="fa fa-caret-up"></span>
       </a>
     </th>
-    <th class="th-sm">
-      <a role="button" (click)="sortType = 'userId'; sortReverse = !sortReverse; sortRentals('bikeName')">
+    <th class="col-3">
+      <a role="button" (click)="sortType = 'bikeName'; sortReverse = !sortReverse; sortRentals('bikeName')">
         Bike name
-        <span *ngIf="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
-        <span *ngIf="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>
+        <span *ngIf="sortType == 'bikeName' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'bikeName' && sortReverse" class="fa fa-caret-up"></span>
       </a>
     </th>
-    <th class="th-sm">
-      <a role="button" (click)="sortType = 'login'; sortReverse = !sortReverse; sortRentals('rentalDate')">
+    <th class="col-3">
+      <a role="button" (click)="sortType = 'rentalDate'; sortReverse = !sortReverse; sortRentals('rentalDate')">
         Rental date
-        <span *ngIf="sortType == 'login' && !sortReverse" class="fa fa-caret-down"></span>
-        <span *ngIf="sortType == 'login' && sortReverse" class="fa fa-caret-up"></span>
+        <span *ngIf="sortType == 'rentalDate' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'rentalDate' && sortReverse" class="fa fa-caret-up"></span>
       </a>
     </th>
-    <th class="th-sm">
-      <a role="button" (click)="sortType = 'email'; sortReverse = !sortReverse; sortRentals('returnDate')">
+    <th class="col-3">
+      <a role="button" (click)="sortType = 'returnDate'; sortReverse = !sortReverse; sortRentals('returnDate')">
         Return date
-        <span *ngIf="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
-        <span *ngIf="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
+        <span *ngIf="sortType == 'returnDate' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'returnDate' && sortReverse" class="fa fa-caret-up"></span>
       </a>
     </th>
-    <th class="th-sm">
-      <a role="button" (click)="sortType = 'phoneNumber'; sortReverse = !sortReverse; sortRentals('price')">
+    <th class="col-2">
+      <a role="button" (click)="sortType = 'price'; sortReverse = !sortReverse; sortRentals('price')">
         Price
-        <span *ngIf="sortType == 'phoneNumber' && !sortReverse" class="fa fa-caret-down"></span>
-        <span *ngIf="sortType == 'phoneNumber' && sortReverse" class="fa fa-caret-up"></span>
+        <span *ngIf="sortType == 'price' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'price' && sortReverse" class="fa fa-caret-up"></span>
       </a>
     </th>
   </tr>

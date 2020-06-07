@@ -2,49 +2,42 @@
   <h1>Active users</h1>
   <h2 class="pb-4">Total: {{users.length}}</h2>
 
-  <!-- <div class="alert alert-info">
-    <h4>DEBUG</h4>
-    <p>Sort Type: {{ sortType }}</p>
-    <p>Sort Reverse: {{ sortReverse }}</p>
-    <p>Search Query: {{ filterForm.value }}</p>
-  </div> -->
-
   <input [formControl]="filterForm" (change)="filterUsers(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter users...">
 
   <table id="userTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
     <thead>
-      <tr>
-        <td class="th-sm">
+      <tr class="d-flex">
+        <th class="col-1">
           <a role="button" (click)="sortType = 'userId'; sortReverse = !sortReverse; sortUsers('userId')">
             ID
             <span *ngIf="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>
           </a>
-        </td>
-        <td class="th-sm">
+        </th>
+        <th class="col-3">
           <a role="button" (click)="sortType = 'login'; sortReverse = !sortReverse; sortUsers('login')">
             Login
             <span *ngIf="sortType == 'login' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'login' && sortReverse" class="fa fa-caret-up"></span>
           </a>
-        </td>
-        <td class="th-sm">
+        </th>
+        <th class="col-4">
           <a role="button" (click)="sortType = 'email'; sortReverse = !sortReverse; sortUsers('email')">
             Email
             <span *ngIf="sortType == 'email' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'email' && sortReverse" class="fa fa-caret-up"></span>
           </a>
-        </td>
-        <td class="th-sm">
+        </th>
+        <th class="col-2">
           <a role="button" (click)="sortType = 'phoneNumber'; sortReverse = !sortReverse; sortUsers('phoneNumber')">
             Phone number
             <span *ngIf="sortType == 'phoneNumber' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'phoneNumber' && sortReverse" class="fa fa-caret-up"></span>
           </a>
-        </td>
-        <td>
+        </th>
+        <th class="col-2">
           Remove
-        </td>
+        </th>
       </tr>
     </thead>
     <tbody>

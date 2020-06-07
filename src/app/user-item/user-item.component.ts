@@ -17,7 +17,8 @@ export class UserItemComponent implements OnInit {
   }
 
   removeUser() {
-    //TODO
+    //TODO - connect to backend
+    // the corresponding user should be marked as deleted
     console.log(`[TODO] User of id ${this.user.userId} is to be deleted now.`);
   }
 }
