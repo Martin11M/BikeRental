@@ -8,15 +8,17 @@ import { ManageStationsPageComponent } from './manage-stations-page/manage-stati
 import { RentPageComponent } from './rent-page/rent-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import {UserAccountPageComponent} from './user-account-page/user-account-page.component';
+import { AuthGuard } from './services/guards/auth.guard';
 
 const routes: Routes = [
   {path: '' , component: LoginPageComponent},
-  {path: 'admin-dashboard' , component: AdminPageComponent},
-  {path: 'user-dashboard' , component: UserPageComponent},
-  {path: 'manage-users-page', component: ManageUsersPageComponent},
-  {path: 'manage-stations-page', component: ManageStationsPageComponent},
-  {path: 'rent-page', component: RentPageComponent},
-  {path: 'user-account-page', component: UserAccountPageComponent},
+  {path: 'login' , component: LoginPageComponent},
+  {path: 'admin-dashboard' , component: AdminPageComponent, canActivate: [AuthGuard]},
+  {path: 'user-dashboard' , component: UserPageComponent, canActivate: [AuthGuard]},
+  {path: 'manage-users-page', component: ManageUsersPageComponent, canActivate: [AuthGuard]},
+  {path: 'manage-stations-page', component: ManageStationsPageComponent, canActivate: [AuthGuard]},
+  {path: 'rent-page', component: RentPageComponent, canActivate: [AuthGuard]},
+  {path: 'user-account-page', component: UserAccountPageComponent, canActivate: [AuthGuard]},
   {path: '**' , component: PageNotFoundComponent},
 ];
 

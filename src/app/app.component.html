@@ -1,4 +1,4 @@
 <div class="app-container">
-  <app-navbar *ngIf="this.user.data"></app-navbar>
+  <app-navbar *ngIf="this.auth.isLoggedIn()"></app-navbar>
   <router-outlet></router-outlet>
 </div>

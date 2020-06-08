@@ -12,14 +12,13 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class LoginPageComponent implements OnInit {
 
-  isLoggedIn$: Observable<boolean>;    
+  isLoggedIn$: Observable<boolean>;
   loading: boolean;
   error: boolean;
 
   constructor(private loginService: LoginService, private router: Router, private user: UserService) {}
 
   ngOnInit() {
-    this.isLoggedIn$ = this.loginService.isLoggedIn;
     this.loading = false;
     this.error = false;
   }
@@ -35,6 +34,8 @@ export class LoginPageComponent implements OnInit {
       this.user.data = data;
       if (data.token.length > 0) {
         data.admin ? this.router.navigate(['/admin-dashboard']) : this.router.navigate(['/user-dashboard']);
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('token', data.token);
       } else {
         this.error = true;
       }
