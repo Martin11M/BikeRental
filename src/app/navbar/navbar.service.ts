@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { NavbarOption } from './navbarOption';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Injectable({ providedIn: 'root' })
 export class NavbarService {
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private user: UserService) {}
 
   adminOptions: NavbarOption[] = [
     { name: 'Dashboard', path: '/admin-dashboard' },
@@ -18,7 +19,7 @@ export class NavbarService {
   ];
 
   getOptions() {
-    return this.auth.isLoggedIn()
+    return this.auth.isLoggedIn() && this.user.data.admin
       ? this.adminOptions
       : this.userOptions;
   }
