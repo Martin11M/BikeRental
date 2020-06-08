@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {User} from "../manage-users-page/user";
+import { User } from '../manage-users-page/user';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-
   loginForm: FormGroup;
   data: any;
   loggedUser: User;

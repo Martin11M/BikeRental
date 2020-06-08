@@ -26,6 +26,7 @@ import {CurrencyPipe, DatePipe} from '@angular/common';
 import {UserAccountPageComponent} from './user-account-page/user-account-page.component';
 import {RentalHistoryComponent} from './rental-history/rental-history.component';
 import {RentalHistoryItemComponent} from './rental-history-item/rental-history-item.component';
+import { AuthGuard } from './services/guards/auth.guard';
 
 
 @NgModule({
@@ -58,7 +59,7 @@ import {RentalHistoryItemComponent} from './rental-history-item/rental-history-i
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [DatePipe, CurrencyPipe],
+  providers: [DatePipe, CurrencyPipe, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

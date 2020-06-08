@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarService } from './navbar.service';
 import { NavbarOption } from './navbarOption';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +13,7 @@ export class NavbarComponent implements OnInit {
 
   navbarOptions: NavbarOption[];
 
-  constructor(private navbar: NavbarService, private router: Router) { }
+  constructor(private navbar: NavbarService, private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
     this.navbarOptions = this.navbar.getOptions();
@@ -20,5 +21,10 @@ export class NavbarComponent implements OnInit {
 
   redirect(path: string) {
     this.router.navigate([path]);
+  }
+
+  logOut() {
+    this.auth.logout();
+    this.router.navigate(['']);
   }
 }
