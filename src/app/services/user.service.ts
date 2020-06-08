@@ -10,8 +10,8 @@ export class UserService {
 
   constructor(private fb: FormBuilder) {
     this.loginForm = this.fb.group({
-      login: ['admin1', Validators.required],
-      password: ['123', Validators.required],
+      login: ['', Validators.required],
+      password: ['', Validators.required],
     });
     this.data = null;
     this.loggedUser = new User();
