@@ -22,10 +22,10 @@ import { UserStatisticsItemComponent } from './user-statistics-item/user-statist
 import { StationItemComponent } from './station-item/station-item.component';
 import { BikesSubtableComponent } from './bikes-subtable/bikes-subtable.component';
 import { BikeItemComponent } from './bike-item/bike-item.component';
-import {CurrencyPipe, DatePipe} from '@angular/common';
-import {UserAccountPageComponent} from './user-account-page/user-account-page.component';
-import {RentalHistoryComponent} from './rental-history/rental-history.component';
-import {RentalHistoryItemComponent} from './rental-history-item/rental-history-item.component';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { UserAccountPageComponent } from './user-account-page/user-account-page.component';
+import { RentalHistoryComponent } from './rental-history/rental-history.component';
+import { RentalHistoryItemComponent } from './rental-history-item/rental-history-item.component';
 import { AuthGuard } from './services/guards/auth.guard';
 
 
@@ -62,4 +62,5 @@ import { AuthGuard } from './services/guards/auth.guard';
   providers: [DatePipe, CurrencyPipe, AuthGuard],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
