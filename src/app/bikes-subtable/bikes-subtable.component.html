@@ -1,5 +1,10 @@
 <div class="container text-center">
 
+  <div *ngIf="stationId == '*'" class="pb-2 pl-4 float-left">
+    <input type="checkbox" class="form-check-input" id="includeRemoved" [checked]="includeRemoved"
+      (change)="includeRemoved = !includeRemoved; checkboxChanged()">
+    <label class="form-check-label" for="includeRemoved">Include removed bikes</label>
+  </div>  
   <input [formControl]="filterForm" (change)="filterBikes(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter bikes...">
 
   <table id="bikeTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
@@ -12,11 +17,25 @@
             <span *ngIf="sortType == 'bikeId' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </th>
-        <th class="col-9">
+        <th class="col-2">
+          <a role="button" (click)="sortType = 'stationId'; sortReverse = !sortReverse; sortBikes('stationId')">
+            Station ID
+            <span *ngIf="sortType == 'stationId' && !sortReverse" class="fa fa-caret-down"></span>
+            <span *ngIf="sortType == 'stationId' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </th>
+        <th class="col-5">
           <a role="button" (click)="sortType = 'name'; sortReverse = !sortReverse; sortBikes('name')">
             Name
             <span *ngIf="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </th>
+        <th class="col-2">
+          <a role="button" (click)="sortType = 'status'; sortReverse = !sortReverse; sortBikes('status')">
+            Status
+            <span *ngIf="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>
+            <span *ngIf="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </th>
         <th class="col-2">

@@ -11,6 +11,7 @@ export class NavbarService {
     { name: 'Dashboard', path: '/admin-dashboard' },
     { name: 'Manage users', path: '/manage-users-page' },
     { name: 'Manage stations', path: '/manage-stations-page' },
+    { name: 'Manage bikes', path: '/manage-bikes-page' },
   ];
 
   userOptions: NavbarOption[] = [
