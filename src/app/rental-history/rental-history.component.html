@@ -11,7 +11,14 @@
         <span *ngIf="sortType == 'rentalId' && sortReverse" class="fa fa-caret-up"></span>
       </a>
     </th>
-    <th class="col-3">
+    <th class="col-1">
+      <a role="button" (click)="sortType = 'userId'; sortReverse = !sortReverse; sortRentals('userId')">
+        User
+        <span *ngIf="sortType == 'userId' && !sortReverse" class="fa fa-caret-down"></span>
+        <span *ngIf="sortType == 'userId' && sortReverse" class="fa fa-caret-up"></span>
+      </a>
+    </th>
+    <th class="col-2">
       <a role="button" (click)="sortType = 'bikeName'; sortReverse = !sortReverse; sortRentals('bikeName')">
         Bike name
         <span *ngIf="sortType == 'bikeName' && !sortReverse" class="fa fa-caret-down"></span>
