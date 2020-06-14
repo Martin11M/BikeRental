@@ -27,6 +27,7 @@ import { UserAccountPageComponent } from './user-account-page/user-account-page.
 import { RentalHistoryComponent } from './rental-history/rental-history.component';
 import { RentalHistoryItemComponent } from './rental-history-item/rental-history-item.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { ManageRentalsPageComponent } from './manage-rentals-page/manage-rentals-page.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { AuthGuard } from './services/guards/auth.guard';
     RentalHistoryItemComponent,
     StationItemComponent,
     BikesSubtableComponent,
-    BikeItemComponent
+    BikeItemComponent,
+    ManageRentalsPageComponent
   ],
   imports: [
     BrowserModule,

@@ -12,15 +12,16 @@ export class RentalService {
 
   }
 
-  getUserRentals(user: User): Rental[] {
+  getUserRentals(userId: string): Rental[] {
       // TODO - Get user rentals from server
       const yesterday: Date = new Date();
       yesterday.setDate(yesterday.getDate() - 1);
-      yesterday.setSeconds(yesterday.getSeconds() + 20)
+      yesterday.setSeconds(yesterday.getSeconds() + 20);
 
       const tempRentals: Rental[] = [
         {
           rentalId: '3',
+          userId: '1',
           bikeName: 'Bike 1',
           rentalDate: yesterday,
           returnDate: new Date(),
@@ -28,6 +29,7 @@ export class RentalService {
         },
         {
           rentalId: '4',
+          userId: '1',
           bikeName: 'Bike 2',
           rentalDate: new Date(),
           returnDate: new Date(),
@@ -35,6 +37,7 @@ export class RentalService {
         },
         {
           rentalId: '4',
+          userId: '2',
           bikeName: 'Bike 3',
           rentalDate: new Date(),
           returnDate: null,
@@ -45,10 +48,10 @@ export class RentalService {
       return tempRentals;
   }
 
-  getUserStatistics(user: User): UserRentStatistics {
+  getUserStatistics(userId: string): UserRentStatistics {
     // TODO - Get user rentals from server
     const userRentStatistics = new UserRentStatistics();
-    const rentals: Rental[] = this.getUserRentals(user);
+    const rentals: Rental[] = this.getUserRentals(userId);
 
     userRentStatistics.lastBike = null;
     userRentStatistics.rentedBikes = 0;

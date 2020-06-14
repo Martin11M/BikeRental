@@ -7,7 +7,7 @@ import {CurrencyPipe, DatePipe} from '@angular/common';
 
 
 @Component({
-  selector: 'app-rent-history',
+  selector: 'app-rental-history',
   templateUrl: './rental-history.component.html',
   styleUrls: ['./rental-history.component.scss']
 })
@@ -19,9 +19,9 @@ export class RentalHistoryComponent implements OnInit {
   filteredRentals: Rental[];
   filterForm: FormControl = new FormControl();
 
-  @Input() user: User;
+  @Input() userId: string;
   constructor(private rentalService: RentalService, private datePipe: DatePipe, private currencyPipe: CurrencyPipe) {
-    this.rentals = this.rentalService.getUserRentals(this.user);
+    this.rentals = this.rentalService.getUserRentals(this.userId);
     this.filteredRentals = this.rentals;
   }
 
@@ -37,6 +37,11 @@ export class RentalHistoryComponent implements OnInit {
       case 'rentalId': {
         this.filteredRentals.sort( (a, b) =>
           (a.rentalId > b.rentalId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        break;
+      }
+      case 'userId': {
+        this.filteredRentals.sort( (a, b) =>
+          (a.userId > b.userId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
         break;
       }
       case 'bikeName': {
@@ -73,8 +78,8 @@ export class RentalHistoryComponent implements OnInit {
           returnDate = this.datePipe.transform(elem.returnDate, 'medium');
         }
 
-        return elem.rentalId.includes(query) || elem.bikeName.includes(query) || rentalDate.includes(query)
-          || returnDate.includes(query) || price.includes(query);
+        return elem.rentalId.includes(query) || elem.userId.includes(query) || elem.bikeName.includes(query)
+          || rentalDate.includes(query) || returnDate.includes(query) || price.includes(query);
       });
     } else {
       this.filteredRentals = this.rentals;
