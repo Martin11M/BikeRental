@@ -19,7 +19,7 @@ export class OpenStreetMapComponent implements OnInit {
 
   ngOnInit() {
     var stations: Station[] = this.manageStationsService.getStations();
-    var markers = stations.map(station => ({lat: station.lat, lng: station.lng}));
+    var markers = stations.map(station => ({lat: station.lat, lng: station.lng, name: station.address}));
 
     this.map = new ol.Map({
       target: 'map',
@@ -45,8 +45,10 @@ export class OpenStreetMapComponent implements OnInit {
         var item = markers[i];
         var longitude = item.lng;
         var latitude = item.lat;
+        var name = item.name;
 
         var iconFeature = new ol.Feature({
+
             geometry: new ol.geom.Point(ol.proj.transform([longitude, latitude], 'EPSG:4326', 'EPSG:3857'))
         });
 
@@ -54,9 +56,15 @@ export class OpenStreetMapComponent implements OnInit {
             image: new ol.style.Icon(({
                 anchor: [0.5, 1],
                 src: "http://cdn.mapmarker.io/api/v1/pin?text=P&size=50&hoffset=1"
-            }))
+            })),
+            text: new ol.style.Text({
+              text: name,
+              font: 'bold 14px serif',
+              fill: new ol.style.Fill({
+                  color: '#000'
+              })
+            })
         });
-
         iconFeature.setStyle(iconStyle);
         features.push(iconFeature);
 
