@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Station } from './station';
 import { ManageStationsService } from './manage-stations-page.service';
+import { Station } from './station';
 
 @Component({
   selector: 'app-manage-stations-page',

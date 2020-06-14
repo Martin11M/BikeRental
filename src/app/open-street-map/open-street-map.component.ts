@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ManageStationsService } from '../manage-stations-page/manage-stations-page.service';
+import { Station } from '../manage-stations-page/station';
 
 declare var ol: any;
 
@@ -7,22 +9,17 @@ declare var ol: any;
   templateUrl: './open-street-map.component.html',
   styleUrls: ['./open-street-map.component.scss']
 })
+
 export class OpenStreetMapComponent implements OnInit {
-  latitude: number = 21.0053;
-  longitude: number = 52.2354;
+  latitude: number = 52.2354;
+  longitude: number = 21.0053;
   map: any;
 
-  ngOnInit() {
-    var mousePositionControl = new ol.control.MousePosition({
-      coordinateFormat: ol.coordinate.createStringXY(4),
-      projection: 'EPSG:4326',
-      // comment the following two lines to have the mouse position
-      // be placed within the map.
-      className: 'custom-mouse-position',
-      target: document.getElementById('mouse-position'),
-      undefinedHTML: '&nbsp;'
-    });
+  constructor(private manageStationsService: ManageStationsService) { }
 
+  ngOnInit() {
+    var stations: Station[] = this.manageStationsService.getStations();
+    var markers = stations.map(station => ({lat: station.lat, lng: station.lng}));
 
     this.map = new ol.Map({
       target: 'map',
@@ -30,27 +27,49 @@ export class OpenStreetMapComponent implements OnInit {
         attributionOptions: {
           collapsible: false
         }
-      }).extend([mousePositionControl]),
+      }),
       layers: [
         new ol.layer.Tile({
           source: new ol.source.OSM()
-        })
+        }),
       ],
       view: new ol.View({
-        center: ol.proj.fromLonLat([this.latitude, this.longitude]),
+        center: ol.proj.fromLonLat([this.longitude, this.latitude]),
         zoom: 12
-      })
+      }),
+    });
+    
+    var features = [];
+
+    for (var i = 0; i < markers.length; i++) {
+        var item = markers[i];
+        var longitude = item.lng;
+        var latitude = item.lat;
+
+        var iconFeature = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.transform([longitude, latitude], 'EPSG:4326', 'EPSG:3857'))
+        });
+
+        var iconStyle = new ol.style.Style({
+            image: new ol.style.Icon(({
+                anchor: [0.5, 1],
+                src: "http://cdn.mapmarker.io/api/v1/pin?text=P&size=50&hoffset=1"
+            }))
+        });
+
+        iconFeature.setStyle(iconStyle);
+        features.push(iconFeature);
+
+    }
+
+    var vectorSource = new ol.source.Vector({
+        features: features
     });
 
-    this.map.on('click', function (args) {
-      console.log(args.coordinate);
-      var lonlat = ol.proj.transform(args.coordinate, 'EPSG:3857', 'EPSG:4326');
-      console.log(lonlat);
-      
-      var lon = lonlat[0];
-      var lat = lonlat[1];
-      alert(`lat: ${lat} long: ${lon}`);
+    var vectorLayer = new ol.layer.Vector({
+        source: vectorSource
     });
+    this.map.addLayer(vectorLayer);
   }
 
   setCenter() {
