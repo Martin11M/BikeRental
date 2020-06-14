@@ -28,6 +28,10 @@ import { RentalHistoryComponent } from './rental-history/rental-history.componen
 import { RentalHistoryItemComponent } from './rental-history-item/rental-history-item.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { ManageRentalsPageComponent } from './manage-rentals-page/manage-rentals-page.component';
+import { AdminWorkspaceComponent } from './admin-workspace/admin-workspace.component';
+import { AdminStatisticsComponent } from './admin-statistics/admin-statistics.component';
+import { AdminStatisticsItemComponent } from './admin-statistics-item/admin-statistics-item.component';
+import { AdminNavigateComponent } from './admin-navigate/admin-navigate.component';
 
 
 @NgModule({
@@ -52,7 +56,11 @@ import { ManageRentalsPageComponent } from './manage-rentals-page/manage-rentals
     StationItemComponent,
     BikesSubtableComponent,
     BikeItemComponent,
-    ManageRentalsPageComponent
+    ManageRentalsPageComponent,
+    AdminWorkspaceComponent,
+    AdminStatisticsComponent,
+    AdminStatisticsItemComponent,
+    AdminNavigateComponent
   ],
   imports: [
     BrowserModule,
