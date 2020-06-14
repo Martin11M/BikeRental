@@ -3,5 +3,5 @@ export class Station {
   address: string;
   lat: number;
   lng: number;
-  // TODO co z flaga deleted ???
+  deleted?: boolean;
 }
