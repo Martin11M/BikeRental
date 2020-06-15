@@ -8,8 +8,6 @@ import {AdminStatistics} from '../admin-statistics-item/admin-statistics';
   styleUrls: ['./admin-statistics.component.scss']
 })
 export class AdminStatisticsComponent implements OnInit {
-  all = '*';
-
   constructor(private adminStatisticsService: AdminStatisticsService) { }
 
   ngOnInit() {
