@@ -8,15 +8,15 @@ export class NavbarService {
   constructor(private auth: AuthService, private user: UserService) {}
 
   adminOptions: NavbarOption[] = [
-    { name: 'Dashboard', path: '/admin-dashboard' },
-    { name: 'Manage users', path: '/manage-users-page' },
-    { name: 'Manage stations', path: '/manage-stations-page' },
-    { name: 'Manage rentals', path: '/manage-rentals-page' },
+    { name: 'Dashboard', path: '/admin-dashboard', img: null },
+    { name: 'Manage users', path: '/manage-users-page', img: 'users' },
+    { name: 'Manage stations', path: '/manage-stations-page', img: 'stations' },
+    { name: 'Manage rentals', path: '/manage-rentals-page', img: 'rentals' },
   ];
 
   userOptions: NavbarOption[] = [
-    { name: 'Dashboard', path: '/user-dashboard' },
-    { name: 'Rent bike', path: '/rent-page' },
+    { name: 'Dashboard', path: '/user-dashboard', img: null },
+    { name: 'Rent bike', path: '/rent-page', img: null },
   ];
 
   getOptions() {

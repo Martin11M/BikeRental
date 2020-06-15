@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ManageStationsService } from '../manage-stations-page/manage-stations-page.service';
+import { ManageStationsService } from '../manage-stations-page/manage-stations.service';
 import { Station } from '../manage-stations-page/station';
 
 declare var ol: any;
@@ -38,7 +38,7 @@ export class OpenStreetMapComponent implements OnInit {
         zoom: 12
       }),
     });
-    
+
     var features = [];
 
     for (var i = 0; i < markers.length; i++) {

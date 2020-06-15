@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ManageStationsService } from './manage-stations-page.service';
+import { ManageStationsService } from './manage-stations.service';
 import { Station } from './station';
 
 @Component({
