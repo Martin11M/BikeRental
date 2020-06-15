@@ -32,6 +32,7 @@ import { AdminWorkspaceComponent } from './admin-workspace/admin-workspace.compo
 import { AdminStatisticsComponent } from './admin-statistics/admin-statistics.component';
 import { AdminStatisticsItemComponent } from './admin-statistics-item/admin-statistics-item.component';
 import { AdminNavigateComponent } from './admin-navigate/admin-navigate.component';
+import { StationAvailableItemComponent } from './station-available-item/station-available-item.component';
 
 
 @NgModule({
@@ -60,7 +61,8 @@ import { AdminNavigateComponent } from './admin-navigate/admin-navigate.componen
     AdminWorkspaceComponent,
     AdminStatisticsComponent,
     AdminStatisticsItemComponent,
-    AdminNavigateComponent
+    AdminNavigateComponent,
+    StationAvailableItemComponent
   ],
   imports: [
     BrowserModule,
