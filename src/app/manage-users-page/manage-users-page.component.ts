@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ManageUsersService } from './manage-users-page.service';
+import { ManageUsersService } from './manage-users.service';
 import { User } from './user';
 import { FormControl } from '@angular/forms';
 

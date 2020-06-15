@@ -18,19 +18,34 @@ export class BikesSubtableService {
           bikeId: 1,
           name: "Big bike",
           status: "FREE",
-          station: {stationId: stationId, address: "test"},
+          station: {
+            stationId: stationId,
+            address: "test",
+            lat: 21.0053,
+            lng: 52.2354,
+          },
         },
         { 
           bikeId: 2,
           name: "Small bike",
           status: "FREE",
-          station: {stationId: stationId, address: "test"},
+          station: {
+            stationId: stationId,
+            address: "test",
+            lat: 21.0053,
+            lng: 52.2354,
+          },
         },
         { 
           bikeId: 3,
           name: "Monocycle",
           status: "FREE",
-          station: {stationId: stationId, address: "test"},
+          station: {
+            stationId: stationId,
+            address: "test",
+            lat: 21.0053,
+            lng: 52.2354,
+          },
         },
       ];
   }
@@ -45,19 +60,34 @@ export class BikesSubtableService {
           bikeId: 1,
           name: "Big bike",
           status: "FREE",
-          station: {stationId: 1, address: "test"},
+          station: {
+            stationId: 1,
+            address: "test",
+            lat: 21.0053,
+            lng: 52.2354,
+          },
         },
         { 
           bikeId: 2,
           name: "Small bike",
           status: "FREE",
-          station: {stationId: 1, address: "test"},
+          station: {
+            stationId: 1,
+            address: "test",
+            lat: 21.0053,
+            lng: 52.2354,
+          },
         },
         { 
           bikeId: 3,
           name: "Monocycle",
           status: "FREE",
-          station: {stationId: 2, address: "test"},
+          station: {
+            stationId: 2,
+            address: "test",
+            lat: 21.0053,
+            lng: 52.2354,
+          },
         },
         { 
           bikeId: 4,
@@ -75,7 +105,12 @@ export class BikesSubtableService {
           bikeId: 6,
           name: "Cool bike",
           status: "FREE",
-          station: {stationId: 3, address: "test 2"},
+          station: {
+            stationId: 3,
+            address: "test 2",
+            lat: 21.0053,
+            lng: 52.2354,
+          },
         },
       ];
   }

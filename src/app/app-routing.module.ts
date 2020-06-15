@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import {UserAccountPageComponent} from './user-account-page/user-account-page.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { ManageBikesPageComponent } from './manage-bikes-page/manage-bikes-page.component';
+import {ManageRentalsPageComponent} from './manage-rentals-page/manage-rentals-page.component';
 
 const routes: Routes = [
   {path: '' , component: LoginPageComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'manage-users-page', component: ManageUsersPageComponent, canActivate: [AuthGuard]},
   {path: 'manage-stations-page', component: ManageStationsPageComponent, canActivate: [AuthGuard]},
   {path: 'manage-bikes-page', component: ManageBikesPageComponent, canActivate: [AuthGuard]},
+  {path: 'manage-rentals-page', component: ManageRentalsPageComponent, canActivate: [AuthGuard]},
   {path: 'rent-page', component: RentPageComponent, canActivate: [AuthGuard]},
   {path: 'user-account-page', component: UserAccountPageComponent, canActivate: [AuthGuard]},
   {path: '**' , component: PageNotFoundComponent},

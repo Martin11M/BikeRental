@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Bike } from './bike';
 import { BikesSubtableService } from './bikes-subtable.service';
+import { Bike } from './bike';
 
 @Component({
   selector: 'app-bikes-subtable',

@@ -1,0 +1,9 @@
+<h2>Navigate</h2>
+
+<div class="row">
+  <div *ngFor="let button of navbarAdminButtons" class="col-sm-6">
+    <a [href]="button.path" [class]="button.img">
+      <h3>{{button.name}}</h3>
+    </a>
+  </div>
+</div>

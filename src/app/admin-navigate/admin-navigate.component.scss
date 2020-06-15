@@ -1,0 +1,36 @@
+a {
+  color: white;
+}
+
+.button-admin-navigate {
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+  padding: 40px;
+  margin-bottom: 20px;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
+  text-shadow: 0 1px 5px #000;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.rentals {
+  @extend .button-admin-navigate;
+  background-image: url('https://drive.google.com/uc?export=view&id=1a-g2AldX7d0v69AVWV44P5owu4HjmkcK');
+}
+
+.stations {
+  @extend .button-admin-navigate;
+  background-image: url('https://drive.google.com/uc?export=view&id=1lUfWrg2UbYa0jDX-mmL7P3wHiVIL42kF');
+}
+
+.users {
+  @extend .button-admin-navigate;
+  background-image: url('https://drive.google.com/uc?export=view&id=1Q3XrUGOTuMoqRG8yqlZTeV4FhScX2n9D');
+}
+

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../manage-users-page/user';
-import { ManageUsersService } from '../manage-users-page/manage-users-page.service';
+import { ManageUsersService } from '../manage-users-page/manage-users.service';
 
 @Component({
   selector: 'app-user-item',

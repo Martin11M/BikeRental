@@ -22,12 +22,18 @@ import { UserStatisticsItemComponent } from './user-statistics-item/user-statist
 import { StationItemComponent } from './station-item/station-item.component';
 import { BikesSubtableComponent } from './bikes-subtable/bikes-subtable.component';
 import { BikeItemComponent } from './bike-item/bike-item.component';
-import {CurrencyPipe, DatePipe} from '@angular/common';
-import {UserAccountPageComponent} from './user-account-page/user-account-page.component';
-import {RentalHistoryComponent} from './rental-history/rental-history.component';
-import {RentalHistoryItemComponent} from './rental-history-item/rental-history-item.component';
+import { CurrencyPipe, DatePipe } from '@angular/common';
+import { UserAccountPageComponent } from './user-account-page/user-account-page.component';
+import { RentalHistoryComponent } from './rental-history/rental-history.component';
+import { RentalHistoryItemComponent } from './rental-history-item/rental-history-item.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { ManageBikesPageComponent } from './manage-bikes-page/manage-bikes-page.component';
+import { ManageRentalsPageComponent } from './manage-rentals-page/manage-rentals-page.component';
+import { AdminWorkspaceComponent } from './admin-workspace/admin-workspace.component';
+import { AdminStatisticsComponent } from './admin-statistics/admin-statistics.component';
+import { AdminStatisticsItemComponent } from './admin-statistics-item/admin-statistics-item.component';
+import { AdminNavigateComponent } from './admin-navigate/admin-navigate.component';
+import { StationAvailableItemComponent } from './station-available-item/station-available-item.component';
 
 
 @NgModule({
@@ -52,7 +58,13 @@ import { ManageBikesPageComponent } from './manage-bikes-page/manage-bikes-page.
     StationItemComponent,
     BikesSubtableComponent,
     BikeItemComponent,
-    ManageBikesPageComponent
+    ManageBikesPageComponent,
+    ManageRentalsPageComponent,
+    AdminWorkspaceComponent,
+    AdminStatisticsComponent,
+    AdminStatisticsItemComponent,
+    AdminNavigateComponent,
+    StationAvailableItemComponent
   ],
   imports: [
     BrowserModule,
@@ -64,4 +76,5 @@ import { ManageBikesPageComponent } from './manage-bikes-page/manage-bikes-page.
   providers: [DatePipe, CurrencyPipe, AuthGuard],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
