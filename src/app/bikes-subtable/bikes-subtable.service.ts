@@ -8,16 +8,39 @@ export class BikesSubtableService {
 
   constructor() { }
 
-  getBikes(stationId: string): Bike[] {
-    let tempBikes: Bike[];
+  getBikesByStationId(stationId: number): Bike[] {
+      // TODO - connect to backend
+      // bike data should be pulled from the database
+      // get bikes for the given station
 
-    if(stationId === "*")
-    {
+      return [
+        { 
+          bikeId: 1,
+          name: "Big bike",
+          status: "FREE",
+          station: {stationId: stationId, address: "test"},
+        },
+        { 
+          bikeId: 2,
+          name: "Small bike",
+          status: "FREE",
+          station: {stationId: stationId, address: "test"},
+        },
+        { 
+          bikeId: 3,
+          name: "Monocycle",
+          status: "FREE",
+          station: {stationId: stationId, address: "test"},
+        },
+      ];
+  }
+
+  getAllBikes() : Bike[] {
       // TODO - connect to backend
       // bike data should be pulled from the database
       // get bikes from all stations, even if they are deleted
 
-      tempBikes = [
+      return [
         { 
           bikeId: 1,
           name: "Big bike",
@@ -55,36 +78,5 @@ export class BikesSubtableService {
           station: {stationId: 3, address: "test 2"},
         },
       ];
-    }
-    else
-    {
-      // TODO - connect to backend
-      // bike data should be pulled from the database
-      // get bikes for the given station
-
-      tempBikes = [
-        { 
-          bikeId: 1,
-          name: "Big bike",
-          status: "FREE",
-          station: {stationId: parseInt(stationId), address: "test"},
-        },
-        { 
-          bikeId: 2,
-          name: "Small bike",
-          status: "FREE",
-          station: {stationId: parseInt(stationId), address: "test"},
-        },
-        { 
-          bikeId: 3,
-          name: "Monocycle",
-          status: "FREE",
-          station: {stationId: parseInt(stationId), address: "test"},
-        },
-      ];
-    }
-
-
-    return tempBikes;
   }
 }

@@ -1,8 +1,8 @@
 <tr  class="fd-flex">
   <td class="align-middle col-1">{{bike.bikeId}}</td>
 
-  <td class="align-middle col-2" *ngIf="bike.station == null">-</td>
-  <td class="align-middle col-2" *ngIf="bike.station != null">{{bike.station.stationId.toString()}}</td>
+  <td class="align-middle col-2" *ngIf="bike.station === null">-</td>
+  <td class="align-middle col-2" *ngIf="bike.station !== null">{{bike.station.stationId.toString()}}</td>
   
   <td class="align-middle col-5">{{bike.name}}</td>
   <td class="align-middle col-2">{{bike.status}}</td>

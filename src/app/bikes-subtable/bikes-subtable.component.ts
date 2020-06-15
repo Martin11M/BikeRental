@@ -14,7 +14,7 @@ export class BikesSubtableComponent implements OnInit {
   sortReverse: boolean = true;
   filterForm: FormControl = new FormControl();
 
-  @Input() stationId: string;
+  @Input() stationId: number = null;
   @Input() includeRemoved: boolean = false;
   bikes: Bike[];
   filteredBikes: Bike[];
@@ -22,13 +22,14 @@ export class BikesSubtableComponent implements OnInit {
   constructor(private bikesSubtableService: BikesSubtableService) { }
 
   ngOnInit() {
-    this.bikes = this.bikesSubtableService.getBikes(this.stationId);
+    if(this.stationId === null)
+      this.bikes = this.bikesSubtableService.getAllBikes();
+    else
+      this.bikes = this.bikesSubtableService.getBikesByStationId(this.stationId);
     this.refillFilteredBikes();
   }
 
   checkboxChanged() {
-    console.log(this.includeRemoved);
-
     this.refillFilteredBikes();
     this.filterBikes(this.filterForm.value);
   }
@@ -66,7 +67,7 @@ export class BikesSubtableComponent implements OnInit {
   }
 
   filterBikes(query: string) {
-    if(query == null)
+    if(query === null)
       query = "";
     else
       query = query.toLowerCase();
@@ -75,8 +76,8 @@ export class BikesSubtableComponent implements OnInit {
       this.filteredBikes = this.bikes.filter( (elem, ind, arr) =>
           (this.includeRemoved ? true : elem.status !== "REMOVED") &&
           (   elem.bikeId.toString().includes(query) || elem.name.toLowerCase().includes(query) || elem.status.toLowerCase().includes(query)
-          || (elem.station == null && query === "-")
-          || (elem.station != null && elem.station.stationId.toString().includes(query))) );
+          || (elem.station === null && query === "-")
+          || (elem.station !== null && elem.station.stationId.toString().includes(query))) );
     else
       this.refillFilteredBikes();
 

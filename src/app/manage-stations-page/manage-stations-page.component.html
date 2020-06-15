@@ -10,15 +10,15 @@
         <th class="col-1">
           <a role="button" (click)="sortType = 'stationId'; sortReverse = !sortReverse; sortStations('stationId')">
             ID
-            <span *ngIf="sortType == 'stationId' && !sortReverse" class="fa fa-caret-down"></span>
-            <span *ngIf="sortType == 'stationId' && sortReverse" class="fa fa-caret-up"></span>
+            <span *ngIf="sortType === 'stationId' && !sortReverse" class="fa fa-caret-down"></span>
+            <span *ngIf="sortType === 'stationId' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </th>
         <th class="col-7">
           <a role="button" (click)="sortType = 'address'; sortReverse = !sortReverse; sortStations('address')">
             Address
-            <span *ngIf="sortType == 'address' && !sortReverse" class="fa fa-caret-down"></span>
-            <span *ngIf="sortType == 'address' && sortReverse" class="fa fa-caret-up"></span>
+            <span *ngIf="sortType === 'address' && !sortReverse" class="fa fa-caret-down"></span>
+            <span *ngIf="sortType === 'address' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </th>
         <th class="col-2">
