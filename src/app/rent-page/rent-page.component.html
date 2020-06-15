@@ -1,1 +1,38 @@
-<p>rent-page works!</p>
+<div class="container text-center">
+    <h1>Available stations</h1>
+    <h2 class="pb-4">Total: {{stations.length}}</h2>
+  
+    <input [formControl]="filterForm" (change)="filterStations(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter available stations...">
+  
+    <table id="availableStationTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
+      <thead>
+        <tr class="fd-flex">
+          <th class="col-1">
+            <a role="button" (click)="sortType = 'stationId'; sortReverse = !sortReverse; sortStations('stationId')">
+              ID
+              <span *ngIf="sortType == 'stationId' && !sortReverse" class="fa fa-caret-down"></span>
+              <span *ngIf="sortType == 'stationId' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th class="col-7">
+            <a role="button" (click)="sortType = 'address'; sortReverse = !sortReverse; sortStations('address')">
+              Address
+              <span *ngIf="sortType == 'address' && !sortReverse" class="fa fa-caret-down"></span>
+              <span *ngIf="sortType == 'address' && sortReverse" class="fa fa-caret-up"></span>
+            </a>
+          </th>
+          <th class="col-2">
+            Available bikes
+          </th>
+          <th class="col-2">
+            Rental bike
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <app-station-available-item style="display: contents;" *ngFor="let station of filteredStations" [station]="station">
+        </app-station-available-item>
+      </tbody>
+    </table>
+  </div>
+  
