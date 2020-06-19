@@ -34,6 +34,7 @@ import { AdminStatisticsComponent } from './admin-statistics/admin-statistics.co
 import { AdminStatisticsItemComponent } from './admin-statistics-item/admin-statistics-item.component';
 import { AdminNavigateComponent } from './admin-navigate/admin-navigate.component';
 import { StationAvailableItemComponent } from './station-available-item/station-available-item.component';
+import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { StationAvailableItemComponent } from './station-available-item/station-
     AdminStatisticsComponent,
     AdminStatisticsItemComponent,
     AdminNavigateComponent,
-    StationAvailableItemComponent
+    StationAvailableItemComponent,
+    AddBikeWindowComponent
   ],
   imports: [
     BrowserModule,

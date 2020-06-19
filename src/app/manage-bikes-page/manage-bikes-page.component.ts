@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-bikes-page',
@@ -7,15 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageBikesPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   addBike() {
-    // TODO - create a window for adding bikes
-    // connect to backend
-    // add the bike to database 
-    console.log(`[TODO] Window for adding bikes should pop up`);
+    this.router.navigate(['/add-bike-window']);
   }
 }
