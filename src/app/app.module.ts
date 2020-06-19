@@ -27,6 +27,7 @@ import { UserAccountPageComponent } from './user-account-page/user-account-page.
 import { RentalHistoryComponent } from './rental-history/rental-history.component';
 import { RentalHistoryItemComponent } from './rental-history-item/rental-history-item.component';
 import { AuthGuard } from './services/guards/auth.guard';
+import { ManageBikesPageComponent } from './manage-bikes-page/manage-bikes-page.component';
 import { ManageRentalsPageComponent } from './manage-rentals-page/manage-rentals-page.component';
 import { AdminWorkspaceComponent } from './admin-workspace/admin-workspace.component';
 import { AdminStatisticsComponent } from './admin-statistics/admin-statistics.component';
@@ -57,6 +58,7 @@ import { StationAvailableItemComponent } from './station-available-item/station-
     StationItemComponent,
     BikesSubtableComponent,
     BikeItemComponent,
+    ManageBikesPageComponent,
     ManageRentalsPageComponent,
     AdminWorkspaceComponent,
     AdminStatisticsComponent,

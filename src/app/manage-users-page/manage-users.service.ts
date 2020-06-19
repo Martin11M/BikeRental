@@ -49,4 +49,10 @@ export class ManageUsersService {
 
     return tempUsers;
   }
+
+  promoteUser(userId: string) {
+    // TODO - connect to backend
+    // user of the given id should be set to admin
+    console.log(`[TODO] User of id  ${userId} should be promoted to admin`);
+  }
 }
