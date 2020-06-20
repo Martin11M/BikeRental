@@ -34,3 +34,8 @@ a {
   background-image: url('https://drive.google.com/uc?export=view&id=1Q3XrUGOTuMoqRG8yqlZTeV4FhScX2n9D');
 }
 
+.bikes {
+  @extend .button-admin-navigate;
+  background-image: url('https://drive.google.com/uc?export=view&id=1AA8u7E1ZP8SpR3lOkohDyBc344JOE5oz ');
+}
+

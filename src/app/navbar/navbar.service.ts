@@ -11,7 +11,7 @@ export class NavbarService {
     { name: 'Dashboard', path: '/admin-dashboard', img: null },
     { name: 'Manage users', path: '/manage-users-page', img: 'users' },
     { name: 'Manage stations', path: '/manage-stations-page', img: 'stations' },
-    { name: 'Manage bikes', path: '/manage-bikes-page', img: null },
+    { name: 'Manage bikes', path: '/manage-bikes-page', img: 'bikes' },
     { name: 'Manage rentals', path: '/manage-rentals-page', img: 'rentals' },
   ];
 
