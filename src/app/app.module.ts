@@ -69,7 +69,7 @@ import { AddStationWindowComponent } from './add-station-window/add-station-wind
     AdminNavigateComponent,
     StationAvailableItemComponent,
     AddBikeWindowComponent,
-    RegistrationComponent
+    RegistrationComponent,
     AddStationWindowComponent
   ],
   imports: [
