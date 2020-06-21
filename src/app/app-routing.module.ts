@@ -13,10 +13,12 @@ import { ManageBikesPageComponent } from './manage-bikes-page/manage-bikes-page.
 import { ManageRentalsPageComponent } from './manage-rentals-page/manage-rentals-page.component';
 import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
 import { LoginGuard } from './services/guards/login.guard';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent, canActivate: [LoginGuard] },
   { path: 'login', component: LoginPageComponent, canActivate: [LoginGuard] },
+  { path: 'registration', component: RegistrationComponent, canActivate: [LoginGuard] },
   {
     path: 'admin-dashboard',
     component: AdminPageComponent,
