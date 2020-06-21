@@ -7,7 +7,7 @@
   <td class="align-middle col-5">{{bike.name}}</td>
   <td class="align-middle col-2">{{bike.status}}</td>
   <td class="align-middle col-2">
-    <a *ngIf="bike.status !== 'REMOVED'" role="button" class="btn btn-danger" (click)="removeBike()">Remove bike</a>
-    <a *ngIf="bike.status === 'REMOVED'" role="button" class="btn btn-secondary disabled" aria-disabled="true">Remove bike</a>
+    <a *ngIf="bike.status === 'FREE'" role="button" class="btn btn-danger" (click)="removeBike()">Remove bike</a>
+    <a *ngIf="bike.status !== 'FREE'" role="button" class="btn btn-secondary disabled" aria-disabled="true">Remove bike</a>
   </td>
 </tr>
