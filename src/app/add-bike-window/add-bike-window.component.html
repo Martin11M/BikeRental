@@ -1,0 +1,30 @@
+<div class="container">
+  <div>
+    <h2>Add Bike</h2>
+  </div>
+  <form [formGroup]="addBikeForm">
+    <div class="form-group">
+      <label for="stationId">Station ID</label>
+      <input class="form-control" id="stationId" formControlName="station" placeholder="Station ID..."
+        [ngClass]="{'is-invalid':addBikeForm.get('station').touched && addBikeForm.get('station').invalid }">
+      <div *ngIf="addBikeForm.get('station').touched && addBikeForm.get('station').invalid">
+        <p class="text-danger">This field is required and must be a positive integer</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="bikeName">Bike name</label>
+      <input class="form-control" id="bikeName" formControlName="bikeName" placeholder="Bike name..."
+        [ngClass]="{'is-invalid':addBikeForm.get('bikeName').touched && addBikeForm.get('bikeName').invalid }">
+      <div *ngIf="addBikeForm.get('bikeName').touched && addBikeForm.get('bikeName').invalid && !addBikeForm.get('bikeName').errors.maxlength">
+        <p class="text-danger">This field is required</p>
+      </div>
+      <div *ngIf="addBikeForm.get('bikeName').touched && addBikeForm.get('bikeName').invalid && addBikeForm.get('bikeName').errors.maxlength">
+        <p class="text-danger">Name too long</p>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-2">
+    <button [disabled]="!addBikeForm.valid" type="button" (click)="addBike();" class="btn btn-success mx-4">Add</button>
+    <button type="button" (click)="back();" class="btn btn-primary">Cancel</button>
+  </div>
+</div>

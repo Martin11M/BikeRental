@@ -11,6 +11,7 @@ import {UserAccountPageComponent} from './user-account-page/user-account-page.co
 import { AuthGuard } from './services/guards/auth.guard';
 import { ManageBikesPageComponent } from './manage-bikes-page/manage-bikes-page.component';
 import {ManageRentalsPageComponent} from './manage-rentals-page/manage-rentals-page.component';
+import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
 
 const routes: Routes = [
   {path: '' , component: LoginPageComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path: 'manage-rentals-page', component: ManageRentalsPageComponent, canActivate: [AuthGuard]},
   {path: 'rent-page', component: RentPageComponent, canActivate: [AuthGuard]},
   {path: 'user-account-page', component: UserAccountPageComponent, canActivate: [AuthGuard]},
+  {path: 'add-bike-window', component: AddBikeWindowComponent, canActivate: [AuthGuard]},
   {path: '**' , component: PageNotFoundComponent},
 ];
 
