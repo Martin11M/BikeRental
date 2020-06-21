@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendUrl: 'https://apsi-bike-rental.herokuapp.com/',
+  backendUrl: 'https://apsi-bike-rental-dev.herokuapp.com/',
 };
 
 /*

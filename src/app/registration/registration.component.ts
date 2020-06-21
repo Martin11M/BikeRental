@@ -35,23 +35,20 @@ export class RegistrationComponent implements OnInit {
 
   registerUser() {
     this.registeredUser = {
-      userId: 'id',
+      // userId: 'id',
       email: this.registrationForm.get('email').value,
       phoneNumber: this.registrationForm.get('number').value,
       login: this.registrationForm.get('login').value,
-      active: true,
-      admin: false,
+      // active: true,
+      // admin: false,
       password: this.registrationForm.get('password').value,
     };
     console.log(this.registeredUser);
 
-    // const parameters = `?username=${username}&password=${password}`;
-    this.http.post(`${this.url}`, this.registeredUser, {headers: this.headers}).subscribe(
-      data => console.log(data)
-    );
+    this.http.post(`${this.url}register`, JSON.stringify(this.registeredUser), {headers: this.headers}).subscribe();
   }
 
   logIn() {
-    this.router.navigate(['/registration']);
+    this.router.navigate(['/login']);
   }
 }
