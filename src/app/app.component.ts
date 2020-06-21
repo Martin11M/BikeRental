@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   constructor(public auth: AuthService) {}
 
   ngOnInit() {
-    window.sessionStorage.clear();
+    // window.sessionStorage.clear();
   }
 }

@@ -12,11 +12,7 @@ import { UserService } from '../user.service';
   providedIn: 'root',
 })
 export class LoginGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private auth: AuthService,
-    private user: UserService
-  ) {}
+  constructor(private router: Router, private auth: AuthService, private user: UserService) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -25,8 +21,8 @@ export class LoginGuard implements CanActivate {
       return true;
     }
     // navigate to login page as user is not authenticated
-    this.user.data.admin
-      ? this.router.navigate(['/admin-dashboard'])
+    this.user.data.admin ?
+      this.router.navigate(['/admin-dashboard'])
       : this.router.navigate(['/user-dashboard']);
     return false;
   }

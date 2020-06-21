@@ -13,12 +13,9 @@ export class AuthService {
     this.user.loginForm.get('password').setValue('');
   }
   isLoggedIn(): boolean {
-    let status = false;
     if (sessionStorage.getItem('isLoggedIn') === 'true') {
-      status = true;
-    } else {
-      status = false;
+      return true;
     }
-    return status;
+    return false;
   }
 }
