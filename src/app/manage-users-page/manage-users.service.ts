@@ -20,6 +20,7 @@ export class ManageUsersService {
         "login": "user1",
         "active": true,
         "admin": false,
+        "password": "123"
       },
       {
         "userId": "6",
@@ -28,6 +29,7 @@ export class ManageUsersService {
         "login": "ala1",
         "active": true,
         "admin": false,
+        "password": "123"
       },
       {
         "userId": "4",
@@ -36,6 +38,7 @@ export class ManageUsersService {
         "login": "user2",
         "active": true,
         "admin": false,
+        "password": "123"
       },
       {
         "userId": "5",
@@ -44,6 +47,7 @@ export class ManageUsersService {
         "login": "user3",
         "active": true,
         "admin": false,
+        "password": "123"
       },
     ]
 

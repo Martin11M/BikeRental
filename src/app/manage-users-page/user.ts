@@ -6,4 +6,5 @@ export class User {
   token?: string;
   active: boolean;
   admin: boolean;
+  password: string;
 }
