@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { LoginService } from './login-page.service';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +11,6 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class LoginPageComponent implements OnInit {
 
-  isLoggedIn$: Observable<boolean>;
   loading: boolean;
   error: boolean;
 
@@ -32,12 +30,11 @@ export class LoginPageComponent implements OnInit {
     this.loading = true;
     this.loginService.logIn(this.user.username, this.user.password).subscribe((data) => {
       this.user.data = data;
-      console.log("lol")
       console.log(this.user.data);
       if (data.token.length > 0) {
         data.admin ? this.router.navigate(['/admin-dashboard']) : this.router.navigate(['/user-dashboard']);
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('token', data.token);
+        sessionStorage.setItem('isLoggedIn', 'true');
+        sessionStorage.setItem('token', data.token);
       } else {
         this.error = true;
       }

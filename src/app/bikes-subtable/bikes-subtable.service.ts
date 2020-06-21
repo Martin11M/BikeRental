@@ -1,12 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Bike } from './bike';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BikesSubtableService {
 
-  constructor() { }
+  private addBikeForm: FormGroup;
+
+  constructor(private fb: FormBuilder)  { 
+    this.addBikeForm = this.fb.group({
+      station: ['', [Validators.required, Validators.pattern("^[1-9][0-9]*$")]],
+      bikeName: ['', [Validators.required, Validators.maxLength(30)]],
+    });
+  }
+
+  getAddBikeForm() : FormGroup {
+    this.addBikeForm.reset();
+    return this.addBikeForm;
+  }
 
   getBikesByStationId(stationId: number): Bike[] {
       // TODO - connect to backend
@@ -113,5 +126,11 @@ export class BikesSubtableService {
           },
         },
       ];
+  }
+
+  addBike(stationId: number, bikeName: string) {
+    // TODO - connect to backend
+    // add the bike to database 
+    console.log(`[TODO] A bike should be added to db with stationID ${stationId} and name ${bikeName}`);
   }
 }

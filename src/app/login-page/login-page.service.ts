@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../services/auth.service';
 
@@ -8,11 +8,6 @@ import { AuthService } from '../services/auth.service';
 export class LoginService {
   url: string;
   headers: HttpHeaders;
-  // private loggedIn = new BehaviorSubject<boolean>(false);
-
-  // get isLoggedIn() {
-  //   return this.loggedIn.asObservable();
-  // }
 
   constructor(private http: HttpClient, private auth: AuthService) {
     this.url = environment.backendUrl;
@@ -24,7 +19,6 @@ export class LoginService {
 
   logIn(username, password): Observable<{ token: string; admin: boolean }> {
     const parameters = `?username=${username}&password=${password}`;
-    // this.loggedIn.next(true);
     return this.http.post(
       `${this.url}token${parameters}`,
       {},
@@ -34,8 +28,5 @@ export class LoginService {
 
   logout() {
     this.auth.logout();
-    // this.loggedIn.next(false);
-    // TODO
-    // this.router.navigate(['/login']);
   }
 }

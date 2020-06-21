@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NavbarService} from '../navbar/navbar.service';
 import {NavbarOption} from '../navbar/navbarOption';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-navigate',
@@ -10,7 +11,7 @@ import {NavbarOption} from '../navbar/navbarOption';
 export class AdminNavigateComponent implements OnInit {
   maxRowElements = 2;
 
-  constructor(private navbarService: NavbarService) { }
+  constructor(private navbarService: NavbarService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -20,4 +21,7 @@ export class AdminNavigateComponent implements OnInit {
       .filter(option => option.img != null);
   }
 
+  navigate(destination: string) {
+    this.router.navigate([`/${destination}`]);
+  }
 }
