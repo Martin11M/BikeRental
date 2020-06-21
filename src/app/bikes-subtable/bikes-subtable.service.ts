@@ -133,4 +133,10 @@ export class BikesSubtableService {
     // add the bike to database 
     console.log(`[TODO] A bike should be added to db with stationID ${stationId} and name ${bikeName}`);
   }
+
+  removeBike(bike: Bike) {
+    //TODO - connect to backend
+    // the corresponding bike should be flagged as REMOVED in the database
+    console.log(`[TODO] Bike of id ${bike.bikeId} is to be deleted now.`);
+  }
 }
