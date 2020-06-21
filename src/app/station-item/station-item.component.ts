@@ -9,6 +9,7 @@ import { Station } from '../manage-stations-page/station';
 export class StationItemComponent implements OnInit {
 
   @Input() station: Station;
+  @Input() includeLatLng: boolean = false;
   isExpanded: boolean
   expandButtonText: string;
 
