@@ -36,6 +36,7 @@ import { AdminNavigateComponent } from './admin-navigate/admin-navigate.componen
 import { StationAvailableItemComponent } from './station-available-item/station-available-item.component';
 import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AddStationWindowComponent } from './add-station-window/add-station-window.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { RegistrationComponent } from './registration/registration.component';
     StationAvailableItemComponent,
     AddBikeWindowComponent,
     RegistrationComponent
+    AddStationWindowComponent
   ],
   imports: [
     BrowserModule,

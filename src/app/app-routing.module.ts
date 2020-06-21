@@ -14,6 +14,7 @@ import { ManageRentalsPageComponent } from './manage-rentals-page/manage-rentals
 import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
 import { LoginGuard } from './services/guards/login.guard';
 import { RegistrationComponent } from './registration/registration.component';
+import { AddStationWindowComponent } from './add-station-window/add-station-window.component';
 
 const routes: Routes = [
   { path: '', component: LoginPageComponent, canActivate: [LoginGuard] },
@@ -58,6 +59,11 @@ const routes: Routes = [
   {
     path: 'add-bike-window',
     component: AddBikeWindowComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-station-window',
+    component: AddStationWindowComponent,
     canActivate: [AuthGuard],
   },
   { path: '**', component: PageNotFoundComponent },
