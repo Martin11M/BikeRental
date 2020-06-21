@@ -23,6 +23,10 @@ export class RentPageComponent implements OnInit {
     this.filteredStations = this.stations;
   }
 
+  isRented() {
+    return this.availableStationsService.isRented;
+  }
+
   sortStations(sortProperty: string) {
     if(sortProperty === '')
       return;

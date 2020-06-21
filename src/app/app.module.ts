@@ -34,10 +34,10 @@ import { AdminStatisticsComponent } from './admin-statistics/admin-statistics.co
 import { AdminStatisticsItemComponent } from './admin-statistics-item/admin-statistics-item.component';
 import { AdminNavigateComponent } from './admin-navigate/admin-navigate.component';
 import { StationAvailableItemComponent } from './station-available-item/station-available-item.component';
+import { ReturnBikeRentalComponent } from './return-bike-rental/return-bike-rental.component';
 import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AddStationWindowComponent } from './add-station-window/add-station-window.component';
-
 
 @NgModule({
   declarations: [
@@ -68,6 +68,7 @@ import { AddStationWindowComponent } from './add-station-window/add-station-wind
     AdminStatisticsItemComponent,
     AdminNavigateComponent,
     StationAvailableItemComponent,
+    ReturnBikeRentalComponent,
     AddBikeWindowComponent,
     RegistrationComponent,
     AddStationWindowComponent

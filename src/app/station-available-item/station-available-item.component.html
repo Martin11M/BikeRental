@@ -1,8 +1,8 @@
 <tr class="fd-flex">
-    <td class="align-middle col-1">{{station.stationId}}</td>
-    <td class="align-middle col-7">{{station.address}}</td>
+    <td class="align-middle col-1">{{ station.stationId }}</td>
+    <td class="align-middle col-7">{{ station.address }}</td>
     <td class="align-middle col-2">{{ availableBikes }}</td>
     <td class="align-middle col-2">
-      <a role="button" class="btn btn-primary" (click)="rentalBike()">Rental</a>
+      <a role="button" class="btn" [class.btn-primary]="!isRented()" [class.btn-secondary]="isRented()" (click)="rentBike()" disabled="isRented()">Rent</a>
     </td>
 </tr>
