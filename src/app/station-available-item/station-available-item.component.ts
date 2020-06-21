@@ -24,7 +24,7 @@ export class StationAvailableItemComponent implements OnInit {
     this.availableBikes = 0;
   }
 
-  rentalBike() {
+  rentBike() {
     //TODO - connect to backend
     // chosen bike should be rental
     console.log(`[TODO] Bike was rental from station of id ${this.station.stationId}.`);
