@@ -6,12 +6,12 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   constructor() {}
   logout(): void {
-    localStorage.setItem('isLoggedIn', 'false');
-    localStorage.removeItem('token');
+    sessionStorage.setItem('isLoggedIn', 'false');
+    sessionStorage.removeItem('token');
   }
   isLoggedIn(): boolean {
     let status = false;
-    if (localStorage.getItem('isLoggedIn') === 'true') {
+    if (sessionStorage.getItem('isLoggedIn') === 'true') {
       status = true;
     } else {
       status = false;
