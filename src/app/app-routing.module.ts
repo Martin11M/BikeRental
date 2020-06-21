@@ -7,30 +7,62 @@ import { ManageUsersPageComponent } from './manage-users-page/manage-users-page.
 import { ManageStationsPageComponent } from './manage-stations-page/manage-stations-page.component';
 import { RentPageComponent } from './rent-page/rent-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import {UserAccountPageComponent} from './user-account-page/user-account-page.component';
+import { UserAccountPageComponent } from './user-account-page/user-account-page.component';
 import { AuthGuard } from './services/guards/auth.guard';
 import { ManageBikesPageComponent } from './manage-bikes-page/manage-bikes-page.component';
-import {ManageRentalsPageComponent} from './manage-rentals-page/manage-rentals-page.component';
+import { ManageRentalsPageComponent } from './manage-rentals-page/manage-rentals-page.component';
 import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
+import { LoginGuard } from './services/guards/login.guard';
 
 const routes: Routes = [
-  {path: '' , component: LoginPageComponent},
-  {path: 'login' , component: LoginPageComponent},
-  {path: 'admin-dashboard' , component: AdminPageComponent, canActivate: [AuthGuard]},
-  {path: 'user-dashboard' , component: UserPageComponent, canActivate: [AuthGuard]},
-  {path: 'manage-users-page', component: ManageUsersPageComponent, canActivate: [AuthGuard]},
-  {path: 'manage-stations-page', component: ManageStationsPageComponent, canActivate: [AuthGuard]},
-  {path: 'manage-bikes-page', component: ManageBikesPageComponent, canActivate: [AuthGuard]},
-  {path: 'manage-rentals-page', component: ManageRentalsPageComponent, canActivate: [AuthGuard]},
-  {path: 'rent-page', component: RentPageComponent, canActivate: [AuthGuard]},
-  {path: 'user-account-page', component: UserAccountPageComponent, canActivate: [AuthGuard]},
-  {path: 'add-bike-window', component: AddBikeWindowComponent, canActivate: [AuthGuard]},
-  {path: '**' , component: PageNotFoundComponent},
+  { path: '', component: LoginPageComponent, canActivate: [LoginGuard] },
+  { path: 'login', component: LoginPageComponent, canActivate: [LoginGuard] },
+  {
+    path: 'admin-dashboard',
+    component: AdminPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'user-dashboard',
+    component: UserPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'manage-users-page',
+    component: ManageUsersPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'manage-stations-page',
+    component: ManageStationsPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'manage-bikes-page',
+    component: ManageBikesPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'manage-rentals-page',
+    component: ManageRentalsPageComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'rent-page', component: RentPageComponent, canActivate: [AuthGuard] },
+  {
+    path: 'user-account-page',
+    component: UserAccountPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'add-bike-window',
+    component: AddBikeWindowComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: '**', component: PageNotFoundComponent },
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
