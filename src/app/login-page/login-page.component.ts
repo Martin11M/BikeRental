@@ -25,6 +25,10 @@ export class LoginPageComponent implements OnInit {
     return this.user.loginForm as FormGroup;
   }
 
+  registration() {
+    this.router.navigate(['/registration']);
+  }
+
   logUser() {
     this.error = false;
     this.loading = true;

@@ -1,0 +1,38 @@
+<div class="container">
+  <div>
+    <h2>Add Station</h2>
+  </div>
+  <form [formGroup]="addStationForm">
+    <div class="form-group">
+      <label for="address">Station address</label>
+      <input class="form-control" id="address" formControlName="address" placeholder="Station address..."
+        [ngClass]="{'is-invalid':addStationForm.get('address').touched && addStationForm.get('address').invalid }">
+      <div *ngIf="addStationForm.get('address').touched && addStationForm.get('address').invalid  && !addStationForm.get('address').errors.maxlength">
+        <p class="text-danger">This field is required</p>
+      </div>
+      <div *ngIf="addStationForm.get('address').touched && addStationForm.get('address').invalid && addStationForm.get('address').errors.maxlength">
+        <p class="text-danger">Name too long</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lat">Latitude</label>
+      <input class="form-control" id="lat" formControlName="lat" placeholder="Latitude..."
+        [ngClass]="{'is-invalid':addStationForm.get('lat').touched && addStationForm.get('lat').invalid }">
+      <div *ngIf="addStationForm.get('lat').touched && addStationForm.get('lat').invalid">
+        <p class="text-danger">This field is required and must be a decimal number</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="lng">Longitude</label>
+      <input class="form-control" id="lng" formControlName="lng" placeholder="Longitude..."
+        [ngClass]="{'is-invalid':addStationForm.get('lng').touched && addStationForm.get('lng').invalid }">
+      <div *ngIf="addStationForm.get('lng').touched && addStationForm.get('lng').invalid">
+        <p class="text-danger">This field is required and must be a decimal number</p>
+      </div>
+    </div>
+  </form>
+  <div class="row mt-2">
+    <button [disabled]="!addStationForm.valid" type="button" (click)="addStation();" class="btn btn-success mx-4">Add</button>
+    <button type="button" (click)="back();" class="btn btn-primary">Cancel</button>
+  </div>
+</div>
