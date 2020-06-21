@@ -35,6 +35,7 @@ import { AdminStatisticsItemComponent } from './admin-statistics-item/admin-stat
 import { AdminNavigateComponent } from './admin-navigate/admin-navigate.component';
 import { StationAvailableItemComponent } from './station-available-item/station-available-item.component';
 import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { AddStationWindowComponent } from './add-station-window/add-station-window.component';
 
 
@@ -68,6 +69,7 @@ import { AddStationWindowComponent } from './add-station-window/add-station-wind
     AdminNavigateComponent,
     StationAvailableItemComponent,
     AddBikeWindowComponent,
+    RegistrationComponent
     AddStationWindowComponent
   ],
   imports: [
