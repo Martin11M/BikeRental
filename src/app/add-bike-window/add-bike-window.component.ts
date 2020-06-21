@@ -18,7 +18,6 @@ export class AddBikeWindowComponent implements OnInit {
   }
 
   addBike() {
-    console.log("add now");
     this.bikesSubtableService.addBike(this.addBikeForm.get('station').value, this.addBikeForm.get('bikeName').value);
     this.back();
   }

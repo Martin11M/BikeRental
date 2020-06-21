@@ -14,11 +14,25 @@
             <span *ngIf="sortType === 'stationId' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </th>
-        <th class="col-7">
+        <th class="col-3">
           <a role="button" (click)="sortType = 'address'; sortReverse = !sortReverse; sortStations('address')">
             Address
             <span *ngIf="sortType === 'address' && !sortReverse" class="fa fa-caret-down"></span>
             <span *ngIf="sortType === 'address' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </th>
+        <th class="col-2">
+          <a role="button" (click)="sortType = 'lat'; sortReverse = !sortReverse; sortStations('lat')">
+            Latitude
+            <span *ngIf="sortType === 'lat' && !sortReverse" class="fa fa-caret-down"></span>
+            <span *ngIf="sortType === 'lat' && sortReverse" class="fa fa-caret-up"></span>
+          </a>
+        </th>
+        <th class="col-2">
+          <a role="button" (click)="sortType = 'lng'; sortReverse = !sortReverse; sortStations('lng')">
+            Longitude
+            <span *ngIf="sortType === 'lng' && !sortReverse" class="fa fa-caret-down"></span>
+            <span *ngIf="sortType === 'lng' && sortReverse" class="fa fa-caret-up"></span>
           </a>
         </th>
         <th class="col-2">
@@ -30,8 +44,9 @@
       </tr>
     </thead>
     <tbody>
-      <app-station-item style="display: contents;" *ngFor="let station of filteredStations" [station]="station">
+      <app-station-item style="display: contents;" *ngFor="let station of filteredStations" [station]="station" [includeLatLng]="true">
       </app-station-item>
     </tbody>
   </table>
+  <button type="button" (click)="addStation()" class="btn btn-success">Add station</button>
 </div>
