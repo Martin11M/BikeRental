@@ -62,8 +62,9 @@ export class RentalService {
 
   getUserStatistics(allUsers: boolean): Observable<UserRentStatistics> {
     return this.getUserRentals(allUsers).pipe(map(
-      (rentals: Rental[]) =>
-        this.getUserStatisticsFromRentals(rentals)
+      (rentals: Rental[]) => {
+        return this.getUserStatisticsFromRentals(rentals);
+      }
     ));
   }
 }

@@ -18,13 +18,15 @@ export class AdminStatisticsService {
 
   get adminStatistics(): Observable<AdminStatistics> {
     return forkJoin(
-      this.rentalService.getUserRentals(true)).pipe(
-      map(([rentals]) => {
+      this.rentalService.getUserRentals(true),
+      this.manageStationsService.getStations()
+    ).pipe(
+      map(([rentals, stations]) => {
         const adminStatistics = new AdminStatistics();
         const usersRentStatistics = this.rentalService.getUserStatisticsFromRentals(rentals);
 
         adminStatistics.usersCount = this.usersCount;
-        adminStatistics.stationsCount = this.stationsCount;
+        adminStatistics.stationsCount = stations.length;
         adminStatistics.activeRentedBikes = rentals.filter(rental => rental.returnDate == null).length;
         adminStatistics.allRentedBikes = rentals.length;
         adminStatistics.totalUserTime = usersRentStatistics.totalTime;
@@ -37,11 +39,5 @@ export class AdminStatisticsService {
 
   get usersCount(): number {
     return this.manageUsersService.getUsers().length;
-  }
-
-  get stationsCount(): number {
-    // TODO - think of something to make this work
-    //return this.manageStationsService.getStations().length;
-    return 0;
   }
 }
