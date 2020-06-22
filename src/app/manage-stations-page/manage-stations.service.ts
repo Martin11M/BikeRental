@@ -45,9 +45,18 @@ export class ManageStationsService {
     return this.http.get<Station[]>(`${this.url}api/stations/getStations`, {headers: this.headers});
   }
 
-  addStation(address: string, lat: number, lng: number) {
-    // TODO - connect to backend
-    // add the station to database
-    console.log(`[TODO] A station should be added to db with address ${address}, latitude ${lat} and longitude ${lng}`);
+  addStation(address: string, lat: number, lng: number): Observable<{ code: number, text: string }> {
+    const body = {
+      address: address,
+      lat: lat,
+      lng: lng
+    };
+    return this.http.post<{ code: number, text: string }>(`${this.url}admin/stations/addStation`, body, {headers: this.headers});
+  }
+
+  removeStation(stationId: number) {
+    //TODO - connect to backend
+    // the corresponding station should be marked as deleted
+    console.log(`[TODO] Station of id ${stationId} is to be deleted now.`);
   }
 }

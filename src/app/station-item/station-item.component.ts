@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Station } from '../manage-stations-page/station';
+import { ManageStationsService } from '../manage-stations-page/manage-stations.service';
 
 @Component({
   selector: 'app-station-item',
@@ -13,7 +14,7 @@ export class StationItemComponent implements OnInit {
   isExpanded: boolean
   expandButtonText: string;
 
-  constructor() { }
+  constructor(private manageStationsService: ManageStationsService) { }
 
   ngOnInit() {
     this.isExpanded = false;
@@ -21,9 +22,7 @@ export class StationItemComponent implements OnInit {
   }
 
   removeStation() {
-    //TODO - connect to backend
-    // the corresponding station should be marked as deleted
-    console.log(`[TODO] Station of id ${this.station.stationId} is to be deleted now.`);
+    this.manageStationsService.removeStation(this.station.stationId);
   }
 
   expandButtonBehavior() {
