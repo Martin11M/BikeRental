@@ -24,6 +24,6 @@ export class UserItemComponent implements OnInit {
   }
 
   promoteUser() {
-    this.manageUsersService.promoteUser(this.user.userId);
+    this.manageUsersService.promoteUser(this.user.userId.toString());
   }
 }

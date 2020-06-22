@@ -14,7 +14,7 @@ export class ManageUsersService {
 
     let tempUsers: User[] = [
       {
-        "userId": "3",
+        "userId": 3,
         "email": "user1@gmail.com",
         "phoneNumber": "111222333",
         "login": "user1",
@@ -22,7 +22,7 @@ export class ManageUsersService {
         "admin": false,
       },
       {
-        "userId": "6",
+        "userId": 6,
         "email": "ala@gmail.com",
         "phoneNumber": "123123124",
         "login": "ala1",
@@ -30,7 +30,7 @@ export class ManageUsersService {
         "admin": false,
       },
       {
-        "userId": "4",
+        "userId": 4,
         "email": "user2@gmail.com",
         "phoneNumber": "444555666",
         "login": "user2",
@@ -38,7 +38,7 @@ export class ManageUsersService {
         "admin": false,
       },
       {
-        "userId": "5",
+        "userId": 5,
         "email": "user3@gmail.com",
         "phoneNumber": "777888999",
         "login": "user3",

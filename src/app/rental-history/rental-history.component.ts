@@ -80,8 +80,9 @@ export class RentalHistoryComponent implements OnInit {
           returnDate = this.datePipe.transform(elem.returnDate, 'medium');
         }
 
-        return elem.rentalId.includes(query) || elem.user.userId.includes(query) || elem.bike.name.includes(query)
-          || rentalDate.includes(query) || returnDate.includes(query) || price.includes(query);
+        return elem.rentalId.toString().includes(query) || elem.user.userId.toString().includes(query)
+          || elem.bike.name.includes(query) || rentalDate.includes(query)
+          || returnDate.includes(query) || price.includes(query);
       });
     } else {
       this.filteredRentals = this.rentals;

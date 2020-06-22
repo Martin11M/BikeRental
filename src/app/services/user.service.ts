@@ -16,7 +16,7 @@ export class UserService {
     this.data = null;
     this.loggedUser = new User();
     this.loggedUser.login = this.loginForm.get('login').value;
-    this.loggedUser.userId = '1';
+    this.loggedUser.userId = 1;
     this.loggedUser.email = 'mail@mail.com';
     this.loggedUser.phoneNumber = '999999999';
   }
