@@ -15,11 +15,15 @@ export class OpenStreetMapComponent implements OnInit {
   longitude: number = 21.0053;
   map: any;
 
+  private stations: Station[];
+
   constructor(private manageStationsService: ManageStationsService) { }
 
   ngOnInit() {
-    var stations: Station[] = this.manageStationsService.getStations();
-    var markers = stations.map(station => ({lat: station.lat, lng: station.lng, name: station.address}));
+    this.manageStationsService.getStations().subscribe( stations => {
+      this.stations = stations;
+      this.setMarkers();
+    });
 
     this.map = new ol.Map({
       target: 'map',
@@ -38,6 +42,10 @@ export class OpenStreetMapComponent implements OnInit {
         zoom: 12
       }),
     });
+  }
+
+  setMarkers() {
+    var markers = this.stations.map(station => ({lat: station.lat, lng: station.lng, name: station.address}));
 
     var features = [];
 

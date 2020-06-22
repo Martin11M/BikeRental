@@ -15,14 +15,26 @@ export class ManageStationsPageComponent implements OnInit {
   sortReverse: boolean = true;
   filterForm: FormControl = new FormControl();
 
+  totalRecords: Number;
+  page: Number;
+
   stations: Station[];
   filteredStations: Station[];
 
-  constructor(private manageStationsService: ManageStationsService, private router: Router) { }
+  constructor(private manageStationsService: ManageStationsService, private router: Router) {
+    this.totalRecords = 0;
+    this.page = 1;
+
+    this.manageStationsService.removeStationFromTableSubject.subscribe(
+      id => { this.removeStationFromTable(id); }
+    );
+   }
 
   ngOnInit() {
-    this.stations = this.manageStationsService.getStations();
-    this.filteredStations = this.stations;
+    this.manageStationsService.getStations().subscribe( stations => {
+      this.stations = stations;
+      this.refillFilteredStations();
+    });
   }
 
   sortStations(sortProperty: string) {
@@ -64,12 +76,25 @@ export class ManageStationsPageComponent implements OnInit {
           (elem.stationId.toString().includes(query) || elem.address.includes(query)) 
           || elem.lat.toString().includes(query) || elem.lng.toString().includes(query));
     else
-      this.filteredStations = this.stations;
+      this.refillFilteredStations();
 
+    this.page = 1;
     this.sortStations(this.sortType);
   }
 
   addStation() {
     this.router.navigate(['/add-station-window']);
+  }
+
+  refillFilteredStations() {
+    this.filteredStations = this.stations;
+
+    this.totalRecords = this.filteredStations.length;
+  }
+
+  removeStationFromTable(stationId: number) {
+    this.stations = this.stations.filter(elem => elem.stationId !== stationId);
+    this.refillFilteredStations();
+    this.filterStations(this.filterForm.value);
   }
 }

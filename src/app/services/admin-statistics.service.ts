@@ -40,6 +40,8 @@ export class AdminStatisticsService {
   }
 
   get stationsCount(): number {
-    return this.manageStationsService.getStations().length;
+    // TODO - think of something to make this work
+    //return this.manageStationsService.getStations().length;
+    return 0;
   }
 }

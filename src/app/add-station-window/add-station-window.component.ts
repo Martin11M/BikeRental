@@ -22,8 +22,12 @@ export class AddStationWindowComponent implements OnInit {
     this.manageStationsService.addStation(
       this.addStationForm.get('address').value,
       this.addStationForm.get('lat').value,
-      this.addStationForm.get('lng').value);
-    this.back();
+      this.addStationForm.get('lng').value).subscribe( result => {
+        if(result.code === 1)
+          this.back();
+        else
+          alert(result.text);
+      });
   }
 
   back() {

@@ -44,8 +44,23 @@
       </tr>
     </thead>
     <tbody>
-      <app-bike-item style="display: contents;" *ngFor="let bike of filteredBikes" [bike]="bike">
+      <app-bike-item style="display: contents;" *ngFor="let bike of filteredBikes | paginate: {
+      id: this.paginationId,
+      itemsPerPage: 10,
+      currentPage: page }" [bike]="bike">
       </app-bike-item>
     </tbody>
   </table>
+  <div style="border-radius: 25px; background-color: #808080; color: #2199e8;">
+    <pagination-controls  [id]="this.paginationId"
+                        (pageChange)="page = $event"
+                        maxSize="7"
+                        directionLinks="true"
+                        autoHide="true"
+                        responsive="true"
+                        previousLabel="Previous"
+                        nextLabel="Next">
+    </pagination-controls>
+  </div>
+
 </div>
