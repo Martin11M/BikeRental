@@ -72,7 +72,7 @@ export class RentalHistoryComponent implements OnInit {
   filterRentals(query: string) {
     if (query) {
       this.filteredRentals = this.rentals.filter( (elem, ind, arr) => {
-        const price = this.currencyPipe.transform(elem.price);
+        const price = this.currencyPipe.transform(elem.price  == null ? 0 : elem.price);
         const rentalDate = this.datePipe.transform(elem.rentalDate, 'medium');
         let returnDate = '';
 
