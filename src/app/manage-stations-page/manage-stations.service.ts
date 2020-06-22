@@ -55,8 +55,7 @@ export class ManageStationsService {
   }
 
   removeStation(stationId: number) {
-    //TODO - connect to backend
-    // the corresponding station should be marked as deleted
-    console.log(`[TODO] Station of id ${stationId} is to be deleted now.`);
+    const putParams: string = `?stationId=${stationId}`;
+    return this.http.put<{ code: number, text: string }>(`${this.url}admin/stations/deleteStation${putParams}`, null, {headers: this.headers});
   }
 }

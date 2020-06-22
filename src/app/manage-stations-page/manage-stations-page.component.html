@@ -1,6 +1,6 @@
 <div class="container text-center">
   <h1>Stations</h1>
-  <h2 class="pb-4">Total: {{stationsCount}}</h2>
+  <h2 class="pb-4">Total: {{ totalRecords }}</h2>
 
   <input [formControl]="filterForm" (change)="filterStations(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter stations...">
 

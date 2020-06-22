@@ -17,7 +17,6 @@ export class ManageStationsPageComponent implements OnInit {
 
   totalRecords: Number;
   page: Number;
-  stationsCount: number = 0;
 
   stations: Station[];
   filteredStations: Station[];
@@ -25,13 +24,16 @@ export class ManageStationsPageComponent implements OnInit {
   constructor(private manageStationsService: ManageStationsService, private router: Router) {
     this.totalRecords = 0;
     this.page = 1;
+
+    this.manageStationsService.removeStationFromTableSubject.subscribe(
+      id => { this.removeStationFromTable(id); }
+    );
    }
 
   ngOnInit() {
     this.manageStationsService.getStations().subscribe( stations => {
       this.stations = stations;
-      this.stationsCount = stations.length;
-      this.refillFilteredBikes();
+      this.refillFilteredStations();
     });
   }
 
@@ -74,7 +76,7 @@ export class ManageStationsPageComponent implements OnInit {
           (elem.stationId.toString().includes(query) || elem.address.includes(query)) 
           || elem.lat.toString().includes(query) || elem.lng.toString().includes(query));
     else
-      this.refillFilteredBikes();
+      this.refillFilteredStations();
 
     this.page = 1;
     this.sortStations(this.sortType);
@@ -84,9 +86,15 @@ export class ManageStationsPageComponent implements OnInit {
     this.router.navigate(['/add-station-window']);
   }
 
-  refillFilteredBikes() {
+  refillFilteredStations() {
     this.filteredStations = this.stations;
 
     this.totalRecords = this.filteredStations.length;
+  }
+
+  removeStationFromTable(stationId: number) {
+    this.stations = this.stations.filter(elem => elem.stationId !== stationId);
+    this.refillFilteredStations();
+    this.filterStations(this.filterForm.value);
   }
 }

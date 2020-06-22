@@ -22,7 +22,12 @@ export class StationItemComponent implements OnInit {
   }
 
   removeStation() {
-    this.manageStationsService.removeStation(this.station.stationId);
+    this.manageStationsService.removeStation(this.station.stationId).subscribe( result => {
+      // if deleted - notify the parent table to remove the station from view
+      if(result.code === 1)
+        this.manageStationsService.removeStationFromTableSubject.next(this.station.stationId);
+      alert(result.text);
+    });
   }
 
   expandButtonBehavior() {
