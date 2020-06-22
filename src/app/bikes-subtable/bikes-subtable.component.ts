@@ -23,10 +23,15 @@ export class BikesSubtableComponent implements OnInit {
 
   ngOnInit() {
     if(this.stationId === null)
-      this.bikes = this.bikesSubtableService.getAllBikes();
+      this.bikesSubtableService.getAllBikes().subscribe( bikes => {
+        this.bikes = bikes;
+        this.refillFilteredBikes();
+      });
     else
-      this.bikes = this.bikesSubtableService.getBikesByStationId(this.stationId);
-    this.refillFilteredBikes();
+      this.bikesSubtableService.getBikesByStationId(this.stationId).subscribe( bikes => {
+        this.bikes = bikes;
+        this.refillFilteredBikes();
+      });
   }
 
   checkboxChanged() {
