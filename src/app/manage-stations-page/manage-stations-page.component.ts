@@ -15,14 +15,24 @@ export class ManageStationsPageComponent implements OnInit {
   sortReverse: boolean = true;
   filterForm: FormControl = new FormControl();
 
+  totalRecords: Number;
+  page: Number;
+  stationsCount: number = 0;
+
   stations: Station[];
   filteredStations: Station[];
 
-  constructor(private manageStationsService: ManageStationsService, private router: Router) { }
+  constructor(private manageStationsService: ManageStationsService, private router: Router) {
+    this.totalRecords = 0;
+    this.page = 1;
+   }
 
   ngOnInit() {
-    this.stations = this.manageStationsService.getStations();
-    this.filteredStations = this.stations;
+    this.manageStationsService.getStations().subscribe( stations => {
+      this.stations = stations;
+      this.stationsCount = stations.length;
+      this.refillFilteredBikes();
+    });
   }
 
   sortStations(sortProperty: string) {
@@ -64,12 +74,19 @@ export class ManageStationsPageComponent implements OnInit {
           (elem.stationId.toString().includes(query) || elem.address.includes(query)) 
           || elem.lat.toString().includes(query) || elem.lng.toString().includes(query));
     else
-      this.filteredStations = this.stations;
+      this.refillFilteredBikes();
 
+    this.page = 1;
     this.sortStations(this.sortType);
   }
 
   addStation() {
     this.router.navigate(['/add-station-window']);
+  }
+
+  refillFilteredBikes() {
+    this.filteredStations = this.stations;
+
+    this.totalRecords = this.filteredStations.length;
   }
 }
