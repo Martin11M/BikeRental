@@ -19,13 +19,15 @@ export class RentalHistoryComponent implements OnInit {
   filteredRentals: Rental[];
   filterForm: FormControl = new FormControl();
 
-  @Input() userId: string;
+  @Input() allRentals = false;
   constructor(private rentalService: RentalService, private datePipe: DatePipe, private currencyPipe: CurrencyPipe) {
-    this.rentals = this.rentalService.getUserRentals(this.userId);
-    this.filteredRentals = this.rentals;
   }
 
   ngOnInit() {
+    this.rentalService.getUserRentals(this.allRentals).subscribe(rentals => {
+      this.rentals = rentals;
+      this.filteredRentals = this.rentals;
+    });
   }
 
   sortRentals(sortProperty: string) {
@@ -41,12 +43,12 @@ export class RentalHistoryComponent implements OnInit {
       }
       case 'userId': {
         this.filteredRentals.sort( (a, b) =>
-          (a.userId > b.userId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+          (a.user.userId > b.user.userId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
         break;
       }
       case 'bikeName': {
         this.filteredRentals.sort( (a, b) =>
-          (a.bikeName > b.bikeName) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+          (a.bike.name > b.bike.name) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
         break;
       }
       case 'rentalDate': {
@@ -78,7 +80,7 @@ export class RentalHistoryComponent implements OnInit {
           returnDate = this.datePipe.transform(elem.returnDate, 'medium');
         }
 
-        return elem.rentalId.includes(query) || elem.userId.includes(query) || elem.bikeName.includes(query)
+        return elem.rentalId.includes(query) || elem.user.userId.includes(query) || elem.bike.name.includes(query)
           || rentalDate.includes(query) || returnDate.includes(query) || price.includes(query);
       });
     } else {
