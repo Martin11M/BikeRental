@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../services/user.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,9 @@ export class BikesSubtableService {
   private addBikeForm: FormGroup;
   private url: string;
   private headers: HttpHeaders;
+
+  // used by child components to notify parent table of object deletions
+  removeBikeFromTableSubject: Subject<number> = new Subject<number>();
 
   constructor(private fb: FormBuilder, private http: HttpClient, private userService: UserService)  { 
     this.addBikeForm = this.fb.group({
@@ -29,7 +32,7 @@ export class BikesSubtableService {
     });
   }
 
-  getAddBikeForm() : FormGroup {
+  getAddBikeForm(): FormGroup {
     this.addBikeForm.reset();
     return this.addBikeForm;
   }
@@ -39,7 +42,7 @@ export class BikesSubtableService {
     return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.headers});
   }
 
-  getAllBikes() : Observable<Bike[]> {
+  getAllBikes(): Observable<Bike[]> {
     return this.http.get<Bike[]>(`${this.url}admin/bikes`, {headers: this.headers});
   }
 
@@ -48,9 +51,7 @@ export class BikesSubtableService {
     return this.http.post<Bike>(`${this.url}admin/bikes/add`, body, {headers: this.headers});
   }
 
-  removeBike(bike: Bike) {
-    //TODO - connect to backend
-    // the corresponding bike should be flagged as REMOVED in the database
-    console.log(`[TODO] Bike of id ${bike.bikeId} is to be deleted now.`);
+  removeBike(bike: Bike): Observable<{ code: number, text: string }> {
+    return this.http.post<{ code: number, text: string }>(`${this.url}admin/bikes/deactivate/${bike.bikeId}`, null, {headers: this.headers});
   }
 }

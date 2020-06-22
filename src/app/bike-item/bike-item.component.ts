@@ -20,6 +20,11 @@ export class BikeItemComponent implements OnInit {
     if(this.bike.status !== "FREE")
       return;
 
-    this.bikesSubtableService.removeBike(this.bike);
+    this.bikesSubtableService.removeBike(this.bike).subscribe( result => {
+      // if deleted - notify the parent table to remove the bike from view
+      if(result.code === 1)
+        this.bikesSubtableService.removeBikeFromTableSubject.next(this.bike.bikeId);
+      alert(result.text);
+    });
   }
 }

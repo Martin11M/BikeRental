@@ -26,6 +26,10 @@ export class BikesSubtableComponent implements OnInit {
   constructor(private bikesSubtableService: BikesSubtableService) {
     this.totalRecords = 0;
     this.page = 1;
+
+    this.bikesSubtableService.removeBikeFromTableSubject.subscribe(
+      id => { this.removeBikeFromTable(id); }
+    );
   }
 
   ngOnInit() {
@@ -106,5 +110,34 @@ export class BikesSubtableComponent implements OnInit {
       this.filteredBikes = this.bikes.filter(elem => elem.status !== "REMOVED");
 
     this.totalRecords = this.filterBikes.length;
+  }
+
+  removeBikeFromTable(bikeId: number) {
+    // mark the bike with given id as removed
+    this.bikes.find( bike => {
+      if(bike.bikeId === bikeId) {
+        bike.status = "REMOVED";
+        return true;
+      }
+      return false;
+    });
+
+    // if not including removed bikes, the amount of bikes in the table
+    // has decreased and the table must be refreshed completely
+    if(!this.includeRemoved) {
+      this.refillFilteredBikes();
+      this.filterBikes(this.filterForm.value)
+    }
+    // if including removed bikes the amount and position of bikes in
+    // the table has not changed and it is enough to just change the status
+    else {
+      this.filteredBikes.find( bike => {
+        if(bike.bikeId === bikeId) {
+          bike.status = "REMOVED";
+          return true;
+        }
+        return false;
+      });
+    }
   }
 }
