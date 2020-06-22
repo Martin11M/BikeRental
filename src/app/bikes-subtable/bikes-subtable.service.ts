@@ -35,18 +35,17 @@ export class BikesSubtableService {
   }
 
   getBikesByStationId(stationId: number): Observable<Bike[]> {
-      const getParams: string = `?stationId=${stationId}`;
-      return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.headers});
+    const getParams: string = `?stationId=${stationId}`;
+    return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.headers});
   }
 
   getAllBikes() : Observable<Bike[]> {
-      return this.http.get<Bike[]>(`${this.url}admin/bikes`, {headers: this.headers});
+    return this.http.get<Bike[]>(`${this.url}admin/bikes`, {headers: this.headers});
   }
 
   addBike(stationId: number, bikeName: string) {
-    // TODO - connect to backend
-    // add the bike to database 
-    console.log(`[TODO] A bike should be added to db with stationID ${stationId} and name ${bikeName}`);
+    const body = { station: { stationId: stationId }, name: bikeName };
+    return this.http.post<Bike>(`${this.url}admin/bikes/add`, body, {headers: this.headers});
   }
 
   removeBike(bike: Bike) {

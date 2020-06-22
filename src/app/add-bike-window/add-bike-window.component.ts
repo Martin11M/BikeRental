@@ -18,8 +18,11 @@ export class AddBikeWindowComponent implements OnInit {
   }
 
   addBike() {
-    this.bikesSubtableService.addBike(this.addBikeForm.get('station').value, this.addBikeForm.get('bikeName').value);
-    this.back();
+    this.bikesSubtableService.addBike(this.addBikeForm.get('station').value, this.addBikeForm.get('bikeName').value)
+      .subscribe(
+        bike => { this.back(); },
+        err => { alert(`Cound not add bike: HTTP Status ${err.status}`) }
+      );
   }
 
   back() {
