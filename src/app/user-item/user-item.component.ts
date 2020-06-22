@@ -24,6 +24,11 @@ export class UserItemComponent implements OnInit {
   }
 
   promoteUser() {
-    this.manageUsersService.promoteUser(this.user.userId);
+    this.manageUsersService.promoteUser(this.user.userId).subscribe( result => {
+      // if deleted - notify the parent table to remove the station from view
+      if(result.code === 1)
+        this.manageUsersService.removeUserFromTableSubject.next(this.user.userId);
+      alert(result.text);
+    });
   }
 }

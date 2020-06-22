@@ -23,6 +23,10 @@ export class ManageUsersPageComponent implements OnInit {
   constructor(private manageUsersService: ManageUsersService) {
     this.totalRecords = 0;
     this.page = 1;
+
+    this.manageUsersService.removeUserFromTableSubject.subscribe(
+      id => { this.removeUserFromTable(id); }
+    );
    }
 
   ngOnInit() {
@@ -81,5 +85,11 @@ export class ManageUsersPageComponent implements OnInit {
     this.filteredUsers = this.users;
 
     this.totalRecords = this.filterUsers.length;
+  }
+
+  removeUserFromTable(id) {
+    this.users = this.users.filter(elem => elem.userId !== id);
+    this.refillFilteredUsers();
+    this.filterUsers(this.filterForm.value);
   }
 }

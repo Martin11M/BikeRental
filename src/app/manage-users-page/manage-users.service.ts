@@ -26,9 +26,8 @@ export class ManageUsersService {
     return this.http.get<User[]>(`${this.url}admin/users`, {headers: this.headers});
   }
 
-  promoteUser(userId: number) {
-    // TODO - connect to backend
-    // user of the given id should be set to admin
-    console.log(`[TODO] User of id  ${userId} should be promoted to admin`);
+  promoteUser(userId: number): Observable<{ code: number, text: string }> {
+    const postParams: string = `${userId}?isAdmin=true`;
+    return this.http.post<{ code: number, text: string }>(`${this.url}admin/users/permissions/${postParams}`, null, {headers: this.headers});
   }
 }
