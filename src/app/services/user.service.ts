@@ -27,4 +27,8 @@ export class UserService {
   get password() {
     return this.loginForm.get('password').value;
   }
+
+  get isAdmin() {
+    return this.data.admin;
+  }
 }
