@@ -30,4 +30,8 @@ export class ManageUsersService {
     const postParams: string = `${userId}?isAdmin=true`;
     return this.http.post<{ code: number, text: string }>(`${this.url}admin/users/permissions/${postParams}`, null, {headers: this.headers});
   }
+
+  removeUser(userId: number) {
+    return this.http.post<{ code: number, text: string }>(`${this.url}admin/users/deactivate/${userId}`, null, {headers: this.headers});
+  }
 }
