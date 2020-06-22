@@ -31,7 +31,7 @@ export class ManageUsersPageComponent implements OnInit {
 
   ngOnInit() {
     this.manageUsersService.getUsers().subscribe( users => {
-      this.users = users.filter( user => !user.admin);
+      this.users = users.filter( user => !user.admin && user.active);
       this.refillFilteredUsers();
     });
   }
@@ -84,7 +84,7 @@ export class ManageUsersPageComponent implements OnInit {
   refillFilteredUsers() {
     this.filteredUsers = this.users;
 
-    this.totalRecords = this.filterUsers.length;
+    this.totalRecords = this.filteredUsers.length;
   }
 
   removeUserFromTable(id) {
