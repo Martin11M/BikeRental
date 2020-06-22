@@ -38,6 +38,7 @@ import { ReturnBikeRentalComponent } from './return-bike-rental/return-bike-rent
 import { AddBikeWindowComponent } from './add-bike-window/add-bike-window.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AddStationWindowComponent } from './add-station-window/add-station-window.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { AddStationWindowComponent } from './add-station-window/add-station-wind
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [DatePipe, CurrencyPipe, AuthGuard],
   bootstrap: [AppComponent]

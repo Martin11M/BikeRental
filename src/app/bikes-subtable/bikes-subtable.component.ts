@@ -14,14 +14,23 @@ export class BikesSubtableComponent implements OnInit {
   sortReverse: boolean = true;
   filterForm: FormControl = new FormControl();
 
+  paginationId: string;
+  totalRecords: Number;
+  page: Number;
+
   @Input() stationId: number = null;
   @Input() includeRemoved: boolean = false;
   bikes: Bike[];
   filteredBikes: Bike[];
 
-  constructor(private bikesSubtableService: BikesSubtableService) { }
+  constructor(private bikesSubtableService: BikesSubtableService) {
+    this.totalRecords = 0;
+    this.page = 1;
+  }
 
   ngOnInit() {
+    this.paginationId = "bikesPagination" + (this.stationId === null ? 'Null' : this.stationId.toString());
+
     if(this.stationId === null)
       this.bikesSubtableService.getAllBikes().subscribe( bikes => {
         this.bikes = bikes;
@@ -87,6 +96,7 @@ export class BikesSubtableComponent implements OnInit {
       this.refillFilteredBikes();
 
     this.sortBikes(this.sortType);
+    this.page = 1;
   }
 
   refillFilteredBikes() {
@@ -94,5 +104,7 @@ export class BikesSubtableComponent implements OnInit {
       this.filteredBikes = this.bikes;
     else
       this.filteredBikes = this.bikes.filter(elem => elem.status !== "REMOVED");
+
+    this.totalRecords = this.filterBikes.length;
   }
 }
