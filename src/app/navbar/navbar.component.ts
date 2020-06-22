@@ -3,6 +3,7 @@ import { NavbarService } from './navbar.service';
 import { NavbarOption } from './navbarOption';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   navbarOptions: NavbarOption[];
 
-  constructor(private navbar: NavbarService, private router: Router, private auth: AuthService) { }
+  constructor(private navbar: NavbarService, private router: Router, private auth: AuthService, private user: UserService) { }
 
   ngOnInit() {
     this.navbarOptions = this.navbar.getOptions();

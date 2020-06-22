@@ -4,51 +4,40 @@ import {ManageStationsService} from '../manage-stations-page/manage-stations.ser
 import {RentalService} from './rental.service';
 import {AdminStatistics} from '../admin-statistics-item/admin-statistics';
 import {UserRentStatistics} from '../user-statistics/user-rent-statistics';
+import {forkJoin, Observable} from 'rxjs';
+import { map } from 'rxjs/operators';
+import {Rental} from '../rental-history/rental';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminStatisticsService {
-  all = '*';
-
   constructor(private manageUsersService: ManageUsersService,
               private manageStationsService: ManageStationsService,
               private rentalService: RentalService) { }
 
-  get adminStatistics(): AdminStatistics {
-    const adminStatistics = new AdminStatistics();
-    const usersRentStatistics = this.usersRentStatistics;
+  get adminStatistics(): Observable<AdminStatistics> {
+    return forkJoin(
+      this.rentalService.getUserRentals(true),
+      this.manageStationsService.getStations()
+    ).pipe(
+      map(([rentals, stations]) => {
+        const adminStatistics = new AdminStatistics();
+        const usersRentStatistics = this.rentalService.getUserStatisticsFromRentals(rentals);
 
-    adminStatistics.usersCount = this.usersCount;
-    adminStatistics.stationsCount = this.stationsCount;
-    adminStatistics.activeRentedBikes = this.activeRentalsCount;
-    adminStatistics.allRentedBikes = this.allRentalsCount;
-    adminStatistics.totalUserTime = usersRentStatistics.totalTime;
-    adminStatistics.totalUserMoney = usersRentStatistics.totalMoney;
+        adminStatistics.usersCount = this.usersCount;
+        adminStatistics.stationsCount = stations.length;
+        adminStatistics.activeRentedBikes = rentals.filter(rental => rental.returnDate == null).length;
+        adminStatistics.allRentedBikes = rentals.length;
+        adminStatistics.totalUserTime = usersRentStatistics.totalTime;
+        adminStatistics.totalUserMoney = usersRentStatistics.totalMoney;
 
-    return adminStatistics;
+        return adminStatistics;
+      })
+    );
   }
 
   get usersCount(): number {
     return this.manageUsersService.getUsers().length;
-  }
-
-  get stationsCount(): number {
-    // TODO - think of something to make this work
-    //return this.manageStationsService.getStations().length;
-    return 0;
-  }
-
-  get allRentalsCount(): number {
-    return this.rentalService.getUserRentals(this.all).length;
-  }
-
-  get activeRentalsCount(): number {
-    return this.rentalService.getUserRentals(this.all)
-      .filter(rental => rental.returnDate == null).length;
-  }
-
-  get usersRentStatistics(): UserRentStatistics {
-    return this.rentalService.getUserStatistics(this.all);
   }
 }

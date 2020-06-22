@@ -55,7 +55,7 @@ export class ManageUsersPageComponent implements OnInit {
   filterUsers(query: string) {
     if(query)
       this.filteredUsers = this.users.filter( (elem, ind, arr) =>
-          (elem.userId.includes(query) || elem.login.includes(query) || elem.email.includes(query)
+          (elem.userId.toString().includes(query) || elem.login.includes(query) || elem.email.includes(query)
             || elem.phoneNumber.includes(query)) );
     else
       this.filteredUsers = this.users;

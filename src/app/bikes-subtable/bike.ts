@@ -4,5 +4,5 @@ export class Bike {
   bikeId: number;
   name: string;
   status: string;
-  station: Station
+  station: Station;
 }
