@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AvailableStationsService } from '../rent-page/rental-page.service';
 import { Station } from '../manage-stations-page/station';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-return-bike-rental',
@@ -10,22 +12,23 @@ import { Station } from '../manage-stations-page/station';
 export class ReturnBikeRentalComponent implements OnInit {
   @Input() station: Station;
 
-  rentedStation = {
-    id: 0,
-    address: ''
-  }
+  allStations: Observable<any>;
 
   constructor(private availableStationsService: AvailableStationsService) { }
 
   ngOnInit() {
     // TODO
     // check if bike was rented
-    this.rentedStation.id = 3;
-    this.rentedStation.address = "S-o-m-e-t-h-i-n-g"
+    this.allStations = this.getStationsList();
   }
 
+  get rentedStation () {
+    return this.availableStationsService.rentedStation;
+  }
   getStationsList() {
-    return this.availableStationsService.getStations().map(station => station.address);
+    return this.availableStationsService.getStations().pipe(
+      map(stations => stations.map(station => station.address))
+    );
   }
 
   returnBike() {

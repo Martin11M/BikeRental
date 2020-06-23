@@ -19,8 +19,10 @@ export class RentPageComponent implements OnInit {
   constructor(private availableStationsService: AvailableStationsService) { }
 
   ngOnInit() {
-    this.stations = this.availableStationsService.getStations();
-    this.filteredStations = this.stations;
+    this.availableStationsService.getStations().subscribe( stations => {
+      this.stations = stations;
+      this.filteredStations = this.stations;
+    });
   }
 
   isRented() {

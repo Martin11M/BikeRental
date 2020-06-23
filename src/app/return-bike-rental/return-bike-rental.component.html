@@ -3,14 +3,14 @@
 <table id="rentedBikeTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
     <thead>
         <tr class="d-flex">
-            <th class="col-4">Station ID</th>
-            <th class="col-6">Address</th>
+            <th class="align-middle col-4">Station ID</th>
+            <th class="align-middle col-8">Address</th>
         </tr>
     </thead>
     <tbody>
         <tr class="d-flex">
             <td class="align-middle col-4">{{ rentedStation.id }}</td>
-            <td class="align-middle col-6">{{ rentedStation.address }}</td>
+            <td class="align-middle col-8">{{ rentedStation.address }}</td>
         </tr>
     </tbody>
 </table>
@@ -20,7 +20,7 @@
 <table id="returnBikeTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
     <thead>
         <tr class="d-flex">
-            <th colspan="2">Return bike</th>
+            <th class="align-middle col-12" colspan="3">Return bike</th>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@
             <td class="align-middle col-4">Select station:</td>
             <td class="align-middle col-6">
                 <select class="form-control">
-                    <option *ngFor="let station of getStationsList()"> {{ station }} </option>
+                    <option *ngFor="let station of allStations | async"> {{ station }} </option>
                 </select>
             </td>
             <td class="align-middle col-2">
