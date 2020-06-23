@@ -14,14 +14,26 @@ export class ManageUsersPageComponent implements OnInit {
   sortReverse: boolean = true;
   filterForm: FormControl = new FormControl();
 
+  totalRecords: number;
+  page: number;
+
   users: User[];
   filteredUsers: User[];
 
-  constructor(private manageUsersService: ManageUsersService) { }
+  constructor(private manageUsersService: ManageUsersService) {
+    this.totalRecords = 0;
+    this.page = 1;
+
+    this.manageUsersService.removeUserFromTableSubject.subscribe(
+      id => { this.removeUserFromTable(id); }
+    );
+   }
 
   ngOnInit() {
-    this.users = this.manageUsersService.getUsers();
-    this.filteredUsers = this.users;
+    this.manageUsersService.getUsers().subscribe( users => {
+      this.users = users.filter( user => !user.admin && user.active);
+      this.refillFilteredUsers();
+    });
   }
 
   sortUsers(sortProperty: string) {
@@ -53,13 +65,31 @@ export class ManageUsersPageComponent implements OnInit {
   }
 
   filterUsers(query: string) {
+    if(query === null)
+      query = "";
+    else
+      query = query.toLowerCase();
+
     if(query)
       this.filteredUsers = this.users.filter( (elem, ind, arr) =>
           (elem.userId.toString().includes(query) || elem.login.includes(query) || elem.email.includes(query)
             || elem.phoneNumber.includes(query)) );
     else
-      this.filteredUsers = this.users;
+      this.refillFilteredUsers();
 
+    this.page = 1;
     this.sortUsers(this.sortType);
+  }
+
+  refillFilteredUsers() {
+    this.filteredUsers = this.users;
+
+    this.totalRecords = this.filteredUsers.length;
+  }
+
+  removeUserFromTable(id) {
+    this.users = this.users.filter(elem => elem.userId !== id);
+    this.refillFilteredUsers();
+    this.filterUsers(this.filterForm.value);
   }
 }

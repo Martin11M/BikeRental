@@ -5,7 +5,7 @@
       (change)="includeRemoved = !includeRemoved; checkboxChanged()">
     <label class="form-check-label" for="includeRemoved">Include removed bikes</label>
   </div>  
-  <input [formControl]="filterForm" (change)="filterBikes(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter bikes...">
+  <input [formControl]="filterForm" (change)="filterBikes(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter bikes (press ENTER to filter)...">
 
   <table id="bikeTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
     <thead>

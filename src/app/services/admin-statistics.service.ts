@@ -38,6 +38,8 @@ export class AdminStatisticsService {
   }
 
   get usersCount(): number {
-    return this.manageUsersService.getUsers().length;
+    // TODO - think of something to make this work
+    //return this.manageUsersService.getUsers().length;
+    return 0;
   }
 }
