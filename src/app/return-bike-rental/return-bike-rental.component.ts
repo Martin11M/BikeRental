@@ -10,15 +10,13 @@ import { Observable } from 'rxjs';
   styleUrls: ['./return-bike-rental.component.scss']
 })
 export class ReturnBikeRentalComponent implements OnInit {
-  @Input() station: Station;
+  // @Input() station: Station;
 
   allStations: Observable<any>;
 
   constructor(private availableStationsService: AvailableStationsService) { }
 
   ngOnInit() {
-    // TODO
-    // check if bike was rented
     this.allStations = this.getStationsList();
   }
 
@@ -32,9 +30,18 @@ export class ReturnBikeRentalComponent implements OnInit {
   }
 
   returnBike() {
-    //TODO - connect to backend
-    // chosen bike should be rental
-    console.log(`[TODO] Bike was return`);
-    this.availableStationsService.returnBike();
+    var stationId = 1;
+    console.log(`Attempt to return bike to station of id ${stationId}.`);
+    this.availableStationsService.endRental(stationId).subscribe( result => {
+      if(result.code === 1) {
+        this.availableStationsService.rentedStation = {
+          id: stationId,
+          address: "TODO-address"
+        }
+        this.availableStationsService.isRented = false;
+      }
+      else
+        alert(result.text);
+    });
   }
 }

@@ -26,14 +26,23 @@ export class StationAvailableItemComponent implements OnInit {
 
   ngOnInit() {
     this.availableStationsService.getActiveBikes(this.station.stationId).subscribe(bikes => {
-      this.allActiveBikes = bikes.length;
+      this.allActiveBikes = bikes.filter(bike => bike.status === "FREE").length;
     });
   }
 
   rentBike() {
-    //TODO - connect to backend
-    // chosen bike should be rental
-    console.log(`[TODO] Bike was rental from station of id ${this.station.stationId}.`);
-    this.availableStationsService.rentBike(this.station);
+    console.log(`Attempt to rental from station of id ${this.station.stationId}.`);
+    this.availableStationsService.makeRental(this.station.stationId).subscribe( result => {
+      if(result.code === 1) {
+        this.availableStationsService.rentedStation = {
+          id: this.station.stationId,
+          address: this.station.address
+        }
+        this.availableStationsService.isRented = true;
+        this.allActiveBikes -= 1;
+      }
+      else
+        alert(result.text);
+    });
   }
 }

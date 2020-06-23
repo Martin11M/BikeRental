@@ -5,6 +5,8 @@ import { UserService } from '../services/user.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Bike } from '../bikes-subtable/bike';
+import { RentalService } from '../services/rental.service';
+import { Rental } from '../rental-history/rental';
 
 @Injectable({
   providedIn: 'root'
@@ -14,55 +16,32 @@ export class AvailableStationsService {
     id: 0,
     address: ''
   }
+  rentals: Rental[];
   isRented = false;
   private url: string;
   private headers: HttpHeaders;
-  
-  constructor(private http: HttpClient, private userService: UserService) {
-    this.isRented = this.checkIfBikeIsRented();
+ 
+  // TODO
+  constructor(private http: HttpClient, private userService: UserService, private rentalService: RentalService) {
+    this.rentalService.getUserRentals(false).subscribe(rentals => {
+      this.rentals = rentals;
+      this.isRented = this.rentals.filter(rental => rental.returnDate === null).length > 0;
+      console.log(`this.isRented befor = ${this.isRented}`)
+    });
+    console.log(`this.isRented = ${this.isRented}`)
+    if (this.isRented) {
+      console.log(JSON.stringify(this.rentals.filter(rental => rental.returnDate === null)[0]))
+      var station = this.rentals.filter(rental => rental.returnDate === null)[0].bike.station;
+      this.rentedStation = {
+        id: station.stationId,
+        address: station.address
+      }
+    };
     this.url = environment.backendUrl;
-
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${userService.data.token}`
     });
-  }
-
-  ngOnInit() {
-    //TODO
-    if (this.isRented) {
-      this.rentedStation = {
-        id: 3,
-        address: "S-o-m-e-t-h-i-n-g"
-      }
-    }
-  }
-
-  checkIfBikeIsRented(): boolean {
-    // TODO 
-    return false;
-  }
-
-  rentBike(station: Station) {
-    this.rentedStation = {
-      id: station.stationId,
-      address: station.address
-    }
-    console.log(JSON.stringify(this.rentedStation))
-    this.isRented = true;
-    // this.manageStationsService.addStation(
-    //   this.addStationForm.get('address').value,
-    //   this.addStationForm.get('lat').value,
-    //   this.addStationForm.get('lng').value).subscribe( result => {
-    //     if(result.code === 1)
-    //       this.back();
-    //     else
-    //       alert(result.text);
-    //   });
-  }
-
-  returnBike() {
-    this.isRented = false;
   }
 
   getStations(): Observable<Station[]> {
@@ -74,30 +53,13 @@ export class AvailableStationsService {
     return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.headers}) as Observable<Bike[]>;
   }
 
-//   Authorization *
-// string
-// (header)
-	
-// Authorization
-// stationId *
-// integer($int64)
-  makeRental(stationId: number) {
-    const body = { station: { stationId: stationId } };
-    return this.http.post<Bike>(`${this.url}api/rental`, body, {headers: this.headers});
+  makeRental(stationId: number) : Observable<{ code: number, text: string }> {
+    const postParams: string = `?stationId=${stationId}`;
+    return this.http.post<{ code: number, text: string }>(`${this.url}api/rentals${postParams}`, null, {headers: this.headers});
   }
 
-//   Authorization *
-// string
-// (header)
-	
-// Authorization
-// stationId *
-// integer($int64)
-// (query)
-	
-// stationId
   endRental(stationId: number) {
     const putParams: string = `?stationId=${stationId}`;
-    return this.http.put<{ code: number, text: string }>(`${this.url}admin/stations/deleteStation${putParams}`, null, {headers: this.headers});
+    return this.http.put<{ code: number, text: string }>(`${this.url}api/rentals${putParams}`, null, {headers: this.headers});
   }
 }
