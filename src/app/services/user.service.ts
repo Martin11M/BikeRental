@@ -22,6 +22,7 @@ export class UserService {
     this.url = environment.backendUrl;
 
     this.loggedUser = new User();
+
     this.loggedUser.login = this.loginForm.get("login").value;
   }
 
@@ -40,5 +41,9 @@ export class UserService {
   }
   get password() {
     return this.loginForm.get("password").value;
+  }
+
+  get isAdmin() {
+    return this.data.admin;
   }
 }

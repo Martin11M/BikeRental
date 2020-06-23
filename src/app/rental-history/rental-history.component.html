@@ -1,5 +1,5 @@
 <div class="text-left">Rental history:</div>
-<input [formControl]="filterForm" (ngModelChange)="filterRentals(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter rentals...">
+<input [formControl]="filterForm" (change)="filterRentals(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter rentals (press ENTER to filter)...">
 
 <table id="rentHistory" class="table table-striped table-dark">
   <thead>
@@ -49,8 +49,22 @@
   </tr>
   </thead>
   <tbody>
-  <app-rental-history-item style="display: contents;" *ngFor="let rental of filteredRentals" [rental]="rental">
+  <app-rental-history-item style="display: contents;" *ngFor="let rental of filteredRentals | paginate: {
+    id: 'rentalsTable',
+    itemsPerPage: 10,
+    currentPage: page }" [rental]="rental">
   </app-rental-history-item>
   </tbody>
 </table>
+<div style="border-radius: 25px; background-color: #808080; color: #2199e8;">
+  <pagination-controls  id="rentalsTable"
+                      (pageChange)="page = $event"
+                      maxSize="7"
+                      directionLinks="true"
+                      autoHide="true"
+                      responsive="true"
+                      previousLabel="Previous"
+                      nextLabel="Next">
+  </pagination-controls>
+</div>
 

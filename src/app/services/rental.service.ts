@@ -2,56 +2,41 @@ import { Injectable } from '@angular/core';
 import {UserRentStatistics} from '../user-statistics/user-rent-statistics';
 import {User} from '../manage-users-page/user';
 import {Rental} from '../rental-history/rental';
+import {UserService} from './user.service';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RentalService {
+  headers: HttpHeaders;
+  url: string;
 
-  constructor() {
-
+  constructor(private userService: UserService, private http: HttpClient) {
+    this.url = environment.backendUrl;
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.userService.data.token}`
+    });
   }
 
-  getUserRentals(userId: string): Rental[] {
-      // TODO - Get user rentals from server
-      const yesterday: Date = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      yesterday.setSeconds(yesterday.getSeconds() + 20);
+  getUserRentals(allRentals: boolean): Observable<Rental[]> {
+    let url = this.url;
+    if (allRentals) {
+      url += 'admin/rentals';
+    } else {
+      url += 'api/rentals';
+    }
 
-      const tempRentals: Rental[] = [
-        {
-          rentalId: '3',
-          userId: '1',
-          bikeName: 'Bike 1',
-          rentalDate: yesterday,
-          returnDate: new Date(),
-          price: 200,
-        },
-        {
-          rentalId: '4',
-          userId: '1',
-          bikeName: 'Bike 2',
-          rentalDate: new Date(),
-          returnDate: new Date(),
-          price: 300,
-        },
-        {
-          rentalId: '4',
-          userId: '2',
-          bikeName: 'Bike 3',
-          rentalDate: new Date(),
-          returnDate: null,
-          price: 300,
-        },
-      ];
-
-      return tempRentals;
+    return this.http.get<Rental[]>(url, {headers: this.headers});
   }
 
-  getUserStatistics(userId: string): UserRentStatistics {
-    // TODO - Get user rentals from server
+  getUserStatisticsFromRentals = (rentals: Rental[]): UserRentStatistics => {
     const userRentStatistics = new UserRentStatistics();
-    const rentals: Rental[] = this.getUserRentals(userId);
+    let lastDate: Date = null;
 
     userRentStatistics.lastBike = null;
     userRentStatistics.rentedBikes = 0;
@@ -59,11 +44,18 @@ export class RentalService {
     userRentStatistics.totalTime = 0;
 
     rentals.forEach(rental => {
+      rental.rentalDate = new Date(rental.rentalDate);
+      rental.returnDate = new Date(rental.returnDate);
+
       userRentStatistics.rentedBikes += 1;
       userRentStatistics.totalMoney += rental.price;
 
+      if (lastDate == null || lastDate < rental.rentalDate) {
+        userRentStatistics.lastBike = rental.bike.name;
+      }
+
       if (rental.returnDate == null) {
-        userRentStatistics.lastBike = rental.bikeName;
+        userRentStatistics.lastBike = rental.bike.name;
       } else {
         const timeDiff = Math.abs(rental.returnDate.getTime() - rental.rentalDate.getTime());
         userRentStatistics.totalTime += (timeDiff / (3600 * 1000));
@@ -71,5 +63,13 @@ export class RentalService {
     });
 
     return userRentStatistics;
+  }
+
+  getUserStatistics(allUsers: boolean): Observable<UserRentStatistics> {
+    return this.getUserRentals(allUsers).pipe(map(
+      (rentals: Rental[]) => {
+        return this.getUserStatisticsFromRentals(rentals);
+      }
+    ));
   }
 }

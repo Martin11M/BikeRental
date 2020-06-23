@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-rentals-page.component.scss']
 })
 export class ManageRentalsPageComponent implements OnInit {
-  all = '*';
 
   constructor() { }
 

@@ -21,7 +21,6 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
     this.url = environment.backendUrl;
     this.headers = new HttpHeaders({
-      'Access-Control-Allow-Origin': '*',
       'Content-Type': 'application/json',
     });
 

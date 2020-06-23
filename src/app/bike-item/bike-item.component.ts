@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Bike } from '../bikes-subtable/bike';
+import { BikesSubtableService } from '../bikes-subtable/bikes-subtable.service';
 
 @Component({
   selector: 'app-bike-item',
@@ -10,14 +11,20 @@ export class BikeItemComponent implements OnInit {
 
   @Input() bike: Bike;
 
-  constructor() { }
+  constructor(private bikesSubtableService: BikesSubtableService) { }
 
   ngOnInit() {
   }
 
   removeBike() {
-    //TODO - connect to backend
-    // the corresponding bike should be flagged as REMOVED in the database
-    console.log(`[TODO] Bike of id ${this.bike.bikeId} is to be deleted now.`);
+    if(this.bike.status !== "FREE")
+      return;
+
+    this.bikesSubtableService.removeBike(this.bike).subscribe( result => {
+      // if deleted - notify the parent table to remove the bike from view
+      if(result.code === 1)
+        this.bikesSubtableService.removeBikeFromTableSubject.next(this.bike.bikeId);
+      alert(result.text);
+    });
   }
 }
