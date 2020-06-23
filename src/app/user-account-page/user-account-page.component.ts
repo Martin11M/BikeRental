@@ -9,10 +9,19 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class UserAccountPageComponent implements OnInit {
 
-  constructor(private user: UserService) { }
+  constructor(public user: UserService) { }
 
   ngOnInit() {
-    this.user.setUser();
+    this.user.setUser().subscribe((data) => {
+      console.log(data);
+      this.user.loggedUser = {
+        ...this.user.loggedUser,
+        phoneNumber: data.phoneNumber,
+        email: data.email,
+        login: data.login,
+        userId: data.userId
+      };
+    });
   }
 
 }
