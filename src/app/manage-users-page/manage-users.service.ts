@@ -7,7 +7,6 @@ import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ManageUsersService {
-
   private url: string;
   private headers: HttpHeaders;
 

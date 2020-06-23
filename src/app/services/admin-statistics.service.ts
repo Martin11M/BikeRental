@@ -3,10 +3,8 @@ import {ManageUsersService} from '../manage-users-page/manage-users.service';
 import {ManageStationsService} from '../manage-stations-page/manage-stations.service';
 import {RentalService} from './rental.service';
 import {AdminStatistics} from '../admin-statistics-item/admin-statistics';
-import {UserRentStatistics} from '../user-statistics/user-rent-statistics';
 import {forkJoin, Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
-import {Rental} from '../rental-history/rental';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +17,15 @@ export class AdminStatisticsService {
   get adminStatistics(): Observable<AdminStatistics> {
     return forkJoin(
       this.rentalService.getUserRentals(true),
-      this.manageStationsService.getStations()
+      this.manageStationsService.getStations(),
+      this.manageUsersService.getUsers()
     ).pipe(
-      map(([rentals, stations]) => {
+      map(([rentals, stations, users]) => {
         const adminStatistics = new AdminStatistics();
         const usersRentStatistics = this.rentalService.getUserStatisticsFromRentals(rentals);
 
-        adminStatistics.usersCount = this.usersCount;
-        adminStatistics.stationsCount = stations.length;
+        adminStatistics.usersCount = users.filter(user => user.active && !user.admin).length;
+        adminStatistics.stationsCount = stations.filter(station => !station.deleted).length;
         adminStatistics.activeRentedBikes = rentals.filter(rental => rental.returnDate == null).length;
         adminStatistics.allRentedBikes = rentals.length;
         adminStatistics.totalUserTime = usersRentStatistics.totalTime;
@@ -35,11 +34,5 @@ export class AdminStatisticsService {
         return adminStatistics;
       })
     );
-  }
-
-  get usersCount(): number {
-    // TODO - think of something to make this work
-    //return this.manageUsersService.getUsers().length;
-    return 0;
   }
 }
