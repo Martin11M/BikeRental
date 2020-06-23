@@ -25,7 +25,7 @@ export class UserService {
     this.loggedUser.login = this.loginForm.get("login").value;
   }
 
-  setUser() {
+  setLoggedInUserData() {
     this.headers = new HttpHeaders({
       "Content-Type": "application/json",
       Authorization: `${this.data.token}`,

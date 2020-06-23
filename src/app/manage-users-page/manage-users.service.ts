@@ -20,9 +20,11 @@ export class ManageUsersService {
       'Authorization': `Bearer ${userService.data.token}`
     });
   }
+
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.url}admin/users`, {headers: this.headers});
   }
+
   promoteUser(userId: number): Observable<{ code: number, text: string }> {
     const postParams: string = `${userId}?isAdmin=true`;
     return this.http.post<{ code: number, text: string }>(`${this.url}admin/users/permissions/${postParams}`, null, {headers: this.headers});

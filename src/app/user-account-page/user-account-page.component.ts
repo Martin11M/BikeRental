@@ -12,7 +12,7 @@ export class UserAccountPageComponent implements OnInit {
   constructor(public user: UserService) { }
 
   ngOnInit() {
-    this.user.setUser().subscribe((data) => {
+    this.user.setLoggedInUserData().subscribe((data) => {
       console.log(data);
       this.user.loggedUser = {
         ...this.user.loggedUser,
