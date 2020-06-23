@@ -20,8 +20,10 @@ export class ManageUsersPageComponent implements OnInit {
   constructor(private manageUsersService: ManageUsersService) { }
 
   ngOnInit() {
-    this.users = this.manageUsersService.getUsers();
-    this.filteredUsers = this.users;
+    this.manageUsersService.getUsers().subscribe(users => {
+      this.users = users.filter(user => !user.admin && user.active);
+      this.filteredUsers = this.users;
+    });
   }
 
   sortUsers(sortProperty: string) {
