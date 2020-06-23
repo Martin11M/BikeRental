@@ -36,6 +36,7 @@ export class RentalService {
 
   getUserStatisticsFromRentals = (rentals: Rental[]): UserRentStatistics => {
     const userRentStatistics = new UserRentStatistics();
+    let lastDate: Date = null;
 
     userRentStatistics.lastBike = null;
     userRentStatistics.rentedBikes = 0;
@@ -48,6 +49,10 @@ export class RentalService {
 
       userRentStatistics.rentedBikes += 1;
       userRentStatistics.totalMoney += rental.price;
+
+      if (lastDate == null || lastDate < rental.rentalDate) {
+        userRentStatistics.lastBike = rental.bike.name;
+      }
 
       if (rental.returnDate == null) {
         userRentStatistics.lastBike = rental.bike.name;
