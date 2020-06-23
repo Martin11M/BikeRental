@@ -24,8 +24,8 @@ export class AdminStatisticsService {
         const adminStatistics = new AdminStatistics();
         const usersRentStatistics = this.rentalService.getUserStatisticsFromRentals(rentals);
 
-        adminStatistics.usersCount = users.length;
-        adminStatistics.stationsCount = stations.length;
+        adminStatistics.usersCount = users.filter(user => user.active && !user.admin).length;
+        adminStatistics.stationsCount = stations.filter(station => !station.deleted).length;
         adminStatistics.activeRentedBikes = rentals.filter(rental => rental.returnDate == null).length;
         adminStatistics.allRentedBikes = rentals.length;
         adminStatistics.totalUserTime = usersRentStatistics.totalTime;

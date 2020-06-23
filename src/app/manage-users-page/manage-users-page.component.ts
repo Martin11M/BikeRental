@@ -14,6 +14,8 @@ export class ManageUsersPageComponent implements OnInit {
   sortReverse: boolean = true;
   filterForm: FormControl = new FormControl();
 
+  totalRecords: number;
+
   users: User[];
   filteredUsers: User[];
 
@@ -23,6 +25,7 @@ export class ManageUsersPageComponent implements OnInit {
     this.manageUsersService.getUsers().subscribe(users => {
       this.users = users.filter(user => !user.admin && user.active);
       this.filteredUsers = this.users;
+      this.totalRecords = this.users.length;
     });
   }
 

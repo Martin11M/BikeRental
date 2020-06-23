@@ -1,6 +1,6 @@
 <div class="container text-center">
   <h1>Active users</h1>
-  <h2 class="pb-4">Total: {{users.length}}</h2>
+  <h2 class="pb-4">Total: {{ totalRecords }}</h2>
 
   <input [formControl]="filterForm" (change)="filterUsers(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter users...">
 
