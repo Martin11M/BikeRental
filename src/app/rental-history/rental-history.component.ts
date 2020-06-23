@@ -13,6 +13,9 @@ import {CurrencyPipe, DatePipe} from '@angular/common';
 })
 export class RentalHistoryComponent implements OnInit {
 
+  totalRecords: Number;
+  page: Number;
+
   sortType = '';
   sortReverse = true;
   rentals: Rental[];
@@ -21,12 +24,15 @@ export class RentalHistoryComponent implements OnInit {
 
   @Input() allRentals = false;
   constructor(private rentalService: RentalService, private datePipe: DatePipe, private currencyPipe: CurrencyPipe) {
+    this.totalRecords = 0;
+    this.page = 1;
   }
 
   ngOnInit() {
     this.rentalService.getUserRentals(this.allRentals).subscribe(rentals => {
       this.rentals = rentals;
       this.filteredRentals = this.rentals;
+      this.totalRecords = this.filterRentals.length;
     });
   }
 
@@ -57,8 +63,12 @@ export class RentalHistoryComponent implements OnInit {
         break;
       }
       case 'returnDate': {
-        this.filteredRentals.sort( (a, b) =>
-          (a.returnDate > b.returnDate) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        this.filteredRentals.sort( (a, b) => {
+          if(!a.returnDate) return this.sortReverse ? 1 : -1;
+          if(!b.returnDate) return this.sortReverse ? -1 : 1;
+          if (this.sortReverse) return a.returnDate > b.returnDate ? 1 : -1;
+          return a.returnDate > b.returnDate ? -1 : 1;
+        });    
         break;
       }
       case 'price': {
@@ -86,8 +96,10 @@ export class RentalHistoryComponent implements OnInit {
       });
     } else {
       this.filteredRentals = this.rentals;
+      this.totalRecords = this.filterRentals.length;
     }
 
+    this.page = 1;
     this.sortRentals(this.sortType);
   }
 
