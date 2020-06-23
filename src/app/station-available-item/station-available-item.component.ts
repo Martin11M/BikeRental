@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Station } from '../manage-stations-page/station';
+import { AvailableStationsService } from '../rent-page/rental-page.service';
 
 @Component({
   selector: 'app-station-available-item',
@@ -11,7 +12,11 @@ export class StationAvailableItemComponent implements OnInit {
   @Input() station: Station;
   availableBikes: number;
 
-  constructor() { }
+  constructor(private availableStationsService: AvailableStationsService) { }
+
+  isRented(){
+    return this.availableStationsService.isRented;
+  }
 
   ngOnInit() {
     //TODO - connect to backend
@@ -19,9 +24,10 @@ export class StationAvailableItemComponent implements OnInit {
     this.availableBikes = 0;
   }
 
-  rentalBike() {
+  rentBike() {
     //TODO - connect to backend
     // chosen bike should be rental
     console.log(`[TODO] Bike was rental from station of id ${this.station.stationId}.`);
+    this.availableStationsService.rentBike();
   }
 }

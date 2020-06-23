@@ -14,7 +14,6 @@ export class ManageUsersService {
 
   constructor(private http: HttpClient, private userService: UserService) {
     this.url = environment.backendUrl;
-
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${userService.data.token}`

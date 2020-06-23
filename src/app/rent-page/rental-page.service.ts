@@ -5,8 +5,25 @@ import { Station } from '../manage-stations-page/station';
   providedIn: 'root'
 })
 export class AvailableStationsService {
+  isRented = false;
 
-  constructor() { }
+  constructor() {
+    this.isRented = this.checkIfBikeIsRented();
+
+  }
+
+  checkIfBikeIsRented(): boolean {
+    // TODO 
+    return false;
+  }
+
+  rentBike() {
+    this.isRented = true;
+  }
+
+  returnBike() {
+    this.isRented = false;
+  }
 
   getStations(): Station[] {
     // TODO - connect to backend

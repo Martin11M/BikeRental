@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminStatisticsService} from '../services/admin-statistics.service';
 import {AdminStatistics} from '../admin-statistics-item/admin-statistics';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-admin-statistics',
@@ -8,12 +9,12 @@ import {AdminStatistics} from '../admin-statistics-item/admin-statistics';
   styleUrls: ['./admin-statistics.component.scss']
 })
 export class AdminStatisticsComponent implements OnInit {
+  adminStatistics = new AdminStatistics();
+
   constructor(private adminStatisticsService: AdminStatisticsService) { }
 
   ngOnInit() {
-  }
-
-  get adminStatistics(): AdminStatistics {
-    return this.adminStatisticsService.adminStatistics;
+    this.adminStatisticsService.adminStatistics.subscribe(
+      adminStatistics => this.adminStatistics = adminStatistics);
   }
 }

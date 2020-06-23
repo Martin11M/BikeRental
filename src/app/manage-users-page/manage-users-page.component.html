@@ -1,8 +1,8 @@
 <div class="container text-center">
   <h1>Active users</h1>
-  <h2 class="pb-4">Total: {{users.length}}</h2>
+  <h2 class="pb-4">Total: {{ totalRecords }}</h2>
 
-  <input [formControl]="filterForm" (change)="filterUsers(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter users...">
+  <input [formControl]="filterForm" (change)="filterUsers(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter users (press ENTER to filter)...">
 
   <table id="userTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
     <thead>
@@ -44,8 +44,22 @@
       </tr>
     </thead>
     <tbody>
-      <app-user-item style="display: contents;" *ngFor="let user of filteredUsers" [user]="user">
+      <app-user-item style="display: contents;" *ngFor="let user of filteredUsers | paginate: {
+        id: 'usersTable',
+        itemsPerPage: 10,
+        currentPage: page }" [user]="user">
       </app-user-item>
     </tbody>
   </table>
+  <div style="border-radius: 25px; background-color: #808080; color: #2199e8;">
+    <pagination-controls  id="usersTable"
+                        (pageChange)="page = $event"
+                        maxSize="10"
+                        directionLinks="true"
+                        autoHide="true"
+                        responsive="true"
+                        previousLabel="Previous"
+                        nextLabel="Next">
+    </pagination-controls>
+  </div>
 </div>
