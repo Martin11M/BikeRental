@@ -35,8 +35,8 @@ export class ReturnBikeRentalComponent implements OnInit {
     this.availableStationsService.endRental(stationId).subscribe( result => {
       if(result.code === 1) {
         this.availableStationsService.rentedStation = {
-          id: stationId,
-          address: "TODO-address"
+          id: 0,
+          address: ""
         }
         this.availableStationsService.isRented = false;
       }
