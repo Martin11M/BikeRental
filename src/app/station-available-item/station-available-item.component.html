@@ -3,6 +3,6 @@
     <td class="align-middle col-7">{{ station.address }}</td>
     <td class="align-middle col-2">{{ this.availableStationsService.availableBikesInStations[this.station.address] }}</td>
     <td class="align-middle col-2">
-      <button role="button" class="btn" [class.btn-primary]="!isRented() && this.availableStationsService.availableBikesInStations[this.station.address] > 0" [class.btn-secondary]="isRented() || allActiveBikes === 0" (click)="rentBike()" [disabled]="isRented() || allActiveBikes === 0">Rent</button>
+      <button role="button" class="btn" [class.btn-primary]="!isRented() && this.availableStationsService.availableBikesInStations[this.station.address] > 0" [class.btn-secondary]="isRented() || this.availableStationsService.availableBikesInStations[this.station.address] === 0" (click)="rentBike()" [disabled]="isRented() || this.availableStationsService.availableBikesInStations[this.station.address] === 0">Rent</button>
     </td>
 </tr>
