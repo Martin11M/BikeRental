@@ -20,11 +20,6 @@ export class OpenStreetMapComponent implements OnInit {
   constructor(private manageStationsService: ManageStationsService) { }
 
   ngOnInit() {
-    this.manageStationsService.getStations().subscribe( stations => {
-      this.stations = stations;
-      this.setMarkers();
-    });
-
     this.map = new ol.Map({
       target: 'map',
       controls: ol.control.defaults({
@@ -42,11 +37,15 @@ export class OpenStreetMapComponent implements OnInit {
         zoom: 12
       }),
     });
+
+    this.manageStationsService.getStations().subscribe( stations => {
+      this.stations = stations;
+      this.setMarkers();
+    });
   }
 
   setMarkers() {
     var markers = this.stations.map(station => ({lat: station.lat, lng: station.lng, name: station.address}));
-
     var features = [];
 
     for (var i = 0; i < markers.length; i++) {
@@ -56,8 +55,7 @@ export class OpenStreetMapComponent implements OnInit {
         var name = item.name;
 
         var iconFeature = new ol.Feature({
-
-            geometry: new ol.geom.Point(ol.proj.transform([longitude, latitude], 'EPSG:4326', 'EPSG:3857'))
+            geometry: new ol.geom.Point(ol.proj.transform([longitude, latitude], 'EPSG:4326', 'EPSG:3857')),
         });
 
         var iconStyle = new ol.style.Style({
@@ -65,6 +63,7 @@ export class OpenStreetMapComponent implements OnInit {
                 anchor: [0.5, 1],
                 src: "http://cdn.mapmarker.io/api/v1/pin?text=P&size=50&hoffset=1"
             })),
+            
             text: new ol.style.Text({
               text: name,
               font: 'bold 14px serif',
@@ -75,7 +74,6 @@ export class OpenStreetMapComponent implements OnInit {
         });
         iconFeature.setStyle(iconStyle);
         features.push(iconFeature);
-
     }
 
     var vectorSource = new ol.source.Vector({

@@ -19,8 +19,10 @@ export class RentPageComponent implements OnInit {
   constructor(private availableStationsService: AvailableStationsService) { }
 
   ngOnInit() {
-    this.stations = this.availableStationsService.getStations();
-    this.filteredStations = this.stations;
+    this.availableStationsService.getStations().subscribe( stations => {
+      this.stations = stations;
+      this.filteredStations = this.stations;
+    });
   }
 
   isRented() {
@@ -29,20 +31,20 @@ export class RentPageComponent implements OnInit {
 
   sortStations(sortProperty: string) {
     if(sortProperty === '')
-      return;
+    return;
 
-      switch(sortProperty) {
-        case 'stationId': {
-          this.filteredStations.sort( (a,b) =>
-            (a.stationId > b.stationId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
-          break;
-        }
-        case 'address': {
-          this.filteredStations.sort( (a,b) =>
-            (a.stationId > b.stationId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
-          break;
-        }
+    switch(sortProperty) {
+      case 'stationId': {
+        this.filteredStations.sort( (a,b) =>
+          (a.stationId > b.stationId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        break;
       }
+      case 'address': {
+        this.filteredStations.sort( (a,b) =>
+          (a.stationId > b.stationId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        break;
+      }
+    }
   }
 
   filterStations(query: string) {
