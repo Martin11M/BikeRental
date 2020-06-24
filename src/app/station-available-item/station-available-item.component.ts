@@ -16,7 +16,6 @@ export class StationAvailableItemComponent implements OnInit {
   constructor(private availableStationsService: AvailableStationsService) { }
 
   availableBikes(stationId: number) {
-    
     return stationId;
   }
 

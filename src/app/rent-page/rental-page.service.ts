@@ -17,7 +17,7 @@ export class AvailableStationsService {
     address: ''
   }
   rentals: Rental[];
-  
+  availableBikesInStations: {[ address: string ] : number } = {};
   isRented = false;
   private url: string;
   private headers: HttpHeaders;
@@ -26,21 +26,28 @@ export class AvailableStationsService {
     this.rentalService.getUserRentals(false).subscribe(rentals => {
       this.rentals = rentals;
       this.isRented = this.rentals.filter(rental => rental.returnDate === null).length > 0;
-      console.log(`this.isRented befor = ${this.isRented}`)
     });
-    console.log(`this.isRented = ${this.isRented}`)
+
     if (this.isRented) {
-      console.log(JSON.stringify(this.rentals.filter(rental => rental.returnDate === null)[0]))
       var station = this.rentals.filter(rental => rental.returnDate === null)[0].bike.station;
       this.rentedStation = {
         id: station.stationId,
         address: station.address
       }
     };
+
     this.url = environment.backendUrl;
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${userService.data.token}`
+    });
+
+    this.getStations().pipe().subscribe( stations => {
+      stations.forEach(station => {
+        this.getActiveBikes(station.stationId).subscribe(bikes => {
+          this.availableBikesInStations[station.address] = bikes.filter(bike => bike.status === "FREE").length;
+        });
+      })
     });
   }
 
