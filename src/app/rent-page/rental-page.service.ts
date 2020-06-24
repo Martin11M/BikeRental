@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Station } from '../manage-stations-page/station';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
@@ -20,7 +20,6 @@ export class AvailableStationsService {
   availableBikesInStations: {[ address: string ] : number } = {};
   isRented = false;
   private url: string;
-  private headers: HttpHeaders;
  
   constructor(private http: HttpClient, private userService: UserService, private rentalService: RentalService) {
     this.rentalService.getUserRentals(false).subscribe(rentals => {
@@ -37,10 +36,6 @@ export class AvailableStationsService {
     };
 
     this.url = environment.backendUrl;
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${userService.data.token}`
-    });
 
     this.getStations().pipe().subscribe( stations => {
       stations.forEach(station => {
@@ -52,21 +47,21 @@ export class AvailableStationsService {
   }
 
   getStations(): Observable<Station[]> {
-    return this.http.get<Station[]>(`${this.url}api/stations/getStations`, { headers: this.headers }) as Observable<Station[]>;
+    return this.http.get<Station[]>(`${this.url}api/stations/getStations`, { headers: this.userService.headers }) as Observable<Station[]>;
   }
   
   getActiveBikes(stationId: number): Observable<Bike[]> {
     const getParams: string = `?stationId=${stationId}`;
-    return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.headers}) as Observable<Bike[]>;
+    return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.userService.headers}) as Observable<Bike[]>;
   }
 
   makeRental(stationId: number) : Observable<{ code: number, text: string }> {
     const postParams: string = `?stationId=${stationId}`;
-    return this.http.post<{ code: number, text: string }>(`${this.url}api/rentals${postParams}`, null, {headers: this.headers});
+    return this.http.post<{ code: number, text: string }>(`${this.url}api/rentals${postParams}`, null, {headers: this.userService.headers});
   }
 
   endRental(stationId: number) {
     const putParams: string = `?stationId=${stationId}`;
-    return this.http.put<{ code: number, text: string }>(`${this.url}api/rentals${putParams}`, null, {headers: this.headers});
+    return this.http.put<{ code: number, text: string }>(`${this.url}api/rentals${putParams}`, null, {headers: this.userService.headers});
   }
 }

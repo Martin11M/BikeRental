@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Station } from './station';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Subject, Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { environment } from 'src/environments/environment';
 
@@ -14,7 +14,6 @@ export class ManageStationsService {
   private addStationForm: FormGroup;
   private initialValues: any;
   private url: string;
-  private headers: HttpHeaders;
 
   // used by child components to notify parent table of object deletions
   removeStationFromTableSubject: Subject<number> = new Subject<number>();
@@ -28,11 +27,6 @@ export class ManageStationsService {
     this.initialValues = this.addStationForm.value;
 
     this.url = environment.backendUrl;
-
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${userService.data.token}`
-    });
   }
 
   getAddStationForm() : FormGroup {
@@ -42,7 +36,7 @@ export class ManageStationsService {
   
 
   getStations(): Observable<Station[]> {
-    return this.http.get<Station[]>(`${this.url}api/stations/getStations`, {headers: this.headers});
+    return this.http.get<Station[]>(`${this.url}api/stations/getStations`, {headers: this.userService.headers});
   }
 
   addStation(address: string, lat: number, lng: number): Observable<{ code: number, text: string }> {
@@ -51,11 +45,11 @@ export class ManageStationsService {
       lat: lat,
       lng: lng
     };
-    return this.http.post<{ code: number, text: string }>(`${this.url}admin/stations/addStation`, body, {headers: this.headers});
+    return this.http.post<{ code: number, text: string }>(`${this.url}admin/stations/addStation`, body, {headers: this.userService.headers});
   }
 
   removeStation(stationId: number) {
     const putParams: string = `?stationId=${stationId}`;
-    return this.http.put<{ code: number, text: string }>(`${this.url}admin/stations/deleteStation${putParams}`, null, {headers: this.headers});
+    return this.http.put<{ code: number, text: string }>(`${this.url}admin/stations/deleteStation${putParams}`, null, {headers: this.userService.headers});
   }
 }

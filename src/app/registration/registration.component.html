@@ -30,7 +30,7 @@
     </div>
     <div class="form-group">
       <label>Phone Number</label>
-      <input type="text" class="form-control" formControlName="number" placeholder="xxx xxx xxxx"
+      <input type="text" class="form-control" formControlName="number" placeholder="xxx xxx xxx"
         [ngClass]="{'is-invalid':registrationForm.get('number').touched && registrationForm.get('number').invalid }">
       <div *ngIf="registrationForm.get('number').touched && registrationForm.get('number').errors?.required">
         <p class="invalid-feedback">Phone Number is required!</p>
