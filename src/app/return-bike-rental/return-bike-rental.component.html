@@ -27,9 +27,11 @@
         <tr class="d-flex">
             <td class="align-middle col-4">Select station:</td>
             <td class="align-middle col-6">
-                <select class="form-control">
-                    <option *ngFor="let station of allStations | async"> {{ station }} </option>
-                </select>
+                <div [formGroup]="returnStationForm">
+                    <select class="form-control" formControlName="station">
+                        <option *ngFor="let station of allStationsAddresses"> {{ station }} </option>
+                    </select>
+                </div>
             </td>
             <td class="align-middle col-2">
                 <a role="button" class="btn btn-danger" (click)="returnBike()">Return</a>

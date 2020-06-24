@@ -17,11 +17,11 @@ export class AvailableStationsService {
     address: ''
   }
   rentals: Rental[];
+  
   isRented = false;
   private url: string;
   private headers: HttpHeaders;
  
-  // TODO
   constructor(private http: HttpClient, private userService: UserService, private rentalService: RentalService) {
     this.rentalService.getUserRentals(false).subscribe(rentals => {
       this.rentals = rentals;
