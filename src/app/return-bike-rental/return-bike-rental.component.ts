@@ -32,7 +32,8 @@ export class ReturnBikeRentalComponent implements OnInit {
   }
 
   returnBike() {
-    var stationId = this.allStations.find(station => station.address === this.returnStationForm.get('station').value).stationId;
+    const returnStationAddress = this.returnStationForm.get('station').value;
+    const stationId = this.allStations.find(station => station.address === returnStationAddress).stationId;
     console.log(`Attempt to return bike to station of id ${stationId}.`);
     this.availableStationsService.endRental(stationId).subscribe( result => {
       if(result.code === 1) {
@@ -41,6 +42,7 @@ export class ReturnBikeRentalComponent implements OnInit {
           address: ""
         }
         this.availableStationsService.isRented = false;
+        this.availableStationsService.availableBikesInStations[returnStationAddress] += 1;
       }
       else
         alert(result.text);
