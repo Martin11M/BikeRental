@@ -2,7 +2,7 @@
     <app-return-bike-rental *ngIf="isRented()"></app-return-bike-rental>
 
     <h1>Available stations</h1>
-    <h2 class="pb-4">Total: {{stations.length}}</h2>
+    <h2 class="pb-4">Total: {{ totalRecords }}</h2>
     <input [formControl]="filterForm" (change)="filterStations(filterForm.value)" type="text" class="form-control mb-1" placeholder="Filter available stations...">
     <table id="availableStationTable" class="table table-bordered table-striped table-dark" cellspacing="0" width="100%">
       <thead>
@@ -32,7 +32,7 @@
       <tbody>
         <app-station-available-item style="display: contents;" *ngFor="let station of filteredStations | paginate: {
           id: 'availableStationsTable',
-          itemsPerPage: 8,
+          itemsPerPage: 10,
           currentPage: page }" [station]="station">
         </app-station-available-item>
       </tbody>

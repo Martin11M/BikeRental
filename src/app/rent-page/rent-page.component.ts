@@ -16,7 +16,7 @@ export class RentPageComponent implements OnInit {
   totalRecords: Number;
   page: Number;
 
-  stations: Station[] = [];
+  stations: Station[];
   filteredStations: Station[];
 
   constructor(private availableStationsService: AvailableStationsService) {
