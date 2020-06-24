@@ -42,7 +42,7 @@ export class BikesSubtableComponent implements OnInit {
       });
     else
       this.bikesSubtableService.getBikesByStationId(this.stationId).subscribe( bikes => {
-        this.bikes = bikes;
+        this.bikes = bikes.filter(bike => bike.status === "FREE");
         this.refillFilteredBikes();
       });
   }

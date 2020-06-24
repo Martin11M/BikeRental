@@ -13,15 +13,22 @@ export class RentPageComponent implements OnInit {
   sortReverse: boolean = true;
   filterForm: FormControl = new FormControl();
 
-  stations: Station[];
+  totalRecords: Number;
+  page: Number;
+
+  stations: Station[] = [];
   filteredStations: Station[];
 
-  constructor(private availableStationsService: AvailableStationsService) { }
+  constructor(private availableStationsService: AvailableStationsService) {
+    this.totalRecords = 0;
+    this.page = 1;
+   }
 
   ngOnInit() {
     this.availableStationsService.getStations().subscribe( stations => {
       this.stations = stations;
       this.filteredStations = this.stations;
+      this.totalRecords = this.filteredStations.length;
     });
   }
 
@@ -41,7 +48,7 @@ export class RentPageComponent implements OnInit {
       }
       case 'address': {
         this.filteredStations.sort( (a,b) =>
-          (a.stationId > b.stationId) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+          (a.address > b.address) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
         break;
       }
     }
@@ -51,9 +58,12 @@ export class RentPageComponent implements OnInit {
     if(query)
       this.filteredStations = this.stations.filter( (elem, ind, arr) =>
           (elem.stationId.toString().includes(query) || elem.address.includes(query)) );
-    else
+    else {
       this.filteredStations = this.stations;
-
+      this.totalRecords = this.filteredStations.length;
+    }
+      
+    this.page = 1;
     this.sortStations(this.sortType);
   }
 }
