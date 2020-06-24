@@ -39,7 +39,8 @@ export class RentalService {
 
     rentals.forEach(rental => {
       rental.rentalDate = new Date(rental.rentalDate);
-      rental.returnDate = new Date(rental.returnDate);
+      if(rental.returnDate !== null)
+        rental.returnDate = new Date(rental.returnDate);
 
       userRentStatistics.rentedBikes += 1;
       userRentStatistics.totalMoney += rental.price;

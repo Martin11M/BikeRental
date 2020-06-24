@@ -72,8 +72,12 @@ export class RentalHistoryComponent implements OnInit {
         break;
       }
       case 'price': {
-        this.filteredRentals.sort( (a, b) =>
-          (a.price > b.price) ? (this.sortReverse ? -1 : 1) : (this.sortReverse ? 1 : -1) );
+        this.filteredRentals.sort( (a, b) => {
+          if(a.price === null) return this.sortReverse ? 1 : -1;
+          if(b.price === null) return this.sortReverse ? -1 : 1;
+          if (this.sortReverse) return a.price > b.price ? 1 : -1;
+          return a.price > b.price ? -1 : 1;
+        });
         break;
       }
     }
