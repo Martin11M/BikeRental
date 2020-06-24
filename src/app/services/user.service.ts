@@ -27,11 +27,6 @@ export class UserService {
   }
 
   setLoggedInUserData() {
-    this.headers = new HttpHeaders({
-      "Content-Type": "application/json",
-      Authorization: `${this.data.token}`,
-    });
-
     return this.http
       .get(`${this.url}api/users/currentUser`, { headers: this.headers }) as Observable<any>;
   }
@@ -45,5 +40,14 @@ export class UserService {
 
   get isAdmin() {
     return this.data.admin;
+  }
+
+  updateData(newData: any) {
+    this.data = newData;
+
+    this.headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: `${this.data.token}`,
+    });
   }
 }

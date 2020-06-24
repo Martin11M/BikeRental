@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Bike } from './bike';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../services/user.service';
 import { Observable, Subject } from 'rxjs';
@@ -13,7 +13,6 @@ export class BikesSubtableService {
 
   private addBikeForm: FormGroup;
   private url: string;
-  private headers: HttpHeaders;
 
   // used by child components to notify parent table of object deletions
   removeBikeFromTableSubject: Subject<number> = new Subject<number>();
@@ -25,11 +24,6 @@ export class BikesSubtableService {
     });
 
     this.url = environment.backendUrl;
-
-    this.headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${userService.data.token}`
-    });
   }
 
   getAddBikeForm(): FormGroup {
@@ -39,19 +33,19 @@ export class BikesSubtableService {
 
   getBikesByStationId(stationId: number): Observable<Bike[]> {
     const getParams: string = `?stationId=${stationId}`;
-    return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.headers});
+    return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.userService.headers});
   }
 
   getAllBikes(): Observable<Bike[]> {
-    return this.http.get<Bike[]>(`${this.url}admin/bikes`, {headers: this.headers});
+    return this.http.get<Bike[]>(`${this.url}admin/bikes`, {headers: this.userService.headers});
   }
 
   addBike(stationId: number, bikeName: string) {
     const body = { station: { stationId: stationId }, name: bikeName };
-    return this.http.post<Bike>(`${this.url}admin/bikes/add`, body, {headers: this.headers});
+    return this.http.post<Bike>(`${this.url}admin/bikes/add`, body, {headers: this.userService.headers});
   }
 
   removeBike(bike: Bike): Observable<{ code: number, text: string }> {
-    return this.http.post<{ code: number, text: string }>(`${this.url}admin/bikes/deactivate/${bike.bikeId}`, null, {headers: this.headers});
+    return this.http.post<{ code: number, text: string }>(`${this.url}admin/bikes/deactivate/${bike.bikeId}`, null, {headers: this.userService.headers});
   }
 }

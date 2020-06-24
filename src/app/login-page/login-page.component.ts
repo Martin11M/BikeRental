@@ -33,7 +33,7 @@ export class LoginPageComponent implements OnInit {
     this.error = false;
     this.loading = true;
     this.loginService.logIn(this.user.username, this.user.password).subscribe((data) => {
-      this.user.data = data;
+      this.user.updateData(data);
       console.log(this.user.data);
       if (data.token.length > 0) {
         data.admin ? this.router.navigate(['/admin-dashboard']) : this.router.navigate(['/user-dashboard']);
