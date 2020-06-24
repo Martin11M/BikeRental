@@ -11,12 +11,10 @@ import { Observable } from 'rxjs';
 export class StationAvailableItemComponent implements OnInit {
  
   @Input() station: Station;
-  allActiveBikes: number;
 
-  constructor(private availableStationsService: AvailableStationsService) { }
+  constructor(public availableStationsService: AvailableStationsService) { }
 
   availableBikes(stationId: number) {
-    
     return stationId;
   }
 
@@ -25,9 +23,6 @@ export class StationAvailableItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.availableStationsService.getActiveBikes(this.station.stationId).subscribe(bikes => {
-      this.allActiveBikes = bikes.filter(bike => bike.status === "FREE").length;
-    });
   }
 
   rentBike() {
@@ -39,7 +34,7 @@ export class StationAvailableItemComponent implements OnInit {
           address: this.station.address
         }
         this.availableStationsService.isRented = true;
-        this.allActiveBikes -= 1;
+        this.availableStationsService.availableBikesInStations[this.station.address] -= 1;
       }
       else
         alert(result.text);
