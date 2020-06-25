@@ -21,7 +21,7 @@ export class ReturnBikeRentalComponent implements OnInit {
               private fb: FormBuilder) {}
 
   ngOnInit() {
-    this.manageStationsService.getStations().pipe().subscribe( stations => {
+    this.manageStationsService.getStations().subscribe( stations => {
       this.allStations = stations;
       this.allStationsAddresses = stations.map(station => station.address);
     });
