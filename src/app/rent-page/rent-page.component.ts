@@ -74,8 +74,6 @@ export class RentPageComponent implements OnInit {
   }
 
   rentMade(rentInfo) {
-    console.log('Haaa');
-    console.log(rentInfo);
     const station = rentInfo as Station;
 
     this.rentedStation = {
