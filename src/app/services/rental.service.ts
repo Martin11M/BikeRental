@@ -67,4 +67,14 @@ export class RentalService {
       }
     ));
   }
+
+  makeRental(stationId: number): Observable<{ code: number, text: string }> {
+    const postParams = `?stationId=${stationId}`;
+    return this.http.post<{ code: number, text: string }>(`${this.url}api/rentals${postParams}`, null, {headers: this.userService.headers});
+  }
+
+  endRental(stationId: number) {
+    const putParams = `?stationId=${stationId}`;
+    return this.http.put<{ code: number, text: string }>(`${this.url}api/rentals${putParams}`, null, {headers: this.userService.headers});
+  }
 }
