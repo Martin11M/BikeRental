@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
 
   navbarOptions: NavbarOption[];
 
-  constructor(private navbar: NavbarService, private router: Router, private auth: AuthService, private user: UserService) { }
+  constructor(private navbar: NavbarService, private router: Router, private auth: AuthService, public user: UserService) { }
 
   ngOnInit() {
     this.navbarOptions = this.navbar.getOptions();
