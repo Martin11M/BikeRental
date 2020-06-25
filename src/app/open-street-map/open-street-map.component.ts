@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ManageStationsService } from '../manage-stations-page/manage-stations.service';
 import { Station } from '../manage-stations-page/station';
 
-declare var ol: any;
+declare let ol: any;
 
 @Component({
   selector: 'app-open-street-map',
@@ -45,49 +45,52 @@ export class OpenStreetMapComponent implements OnInit {
   }
 
   setMarkers() {
-    var markers = this.stations.map(station => ({lat: station.lat, lng: station.lng, name: station.address}));
-    var features = [];
+    const markers = this.stations.map(station => ({lat: station.lat, lng: station.lng, name: station.address}));
+    const features = [];
 
-    for (var i = 0; i < markers.length; i++) {
-        var item = markers[i];
-        var longitude = item.lng;
-        var latitude = item.lat;
-        var name = item.name;
+    for (let i = 0; i < markers.length; i++) {
+        const item = markers[i];
+        const longitude = item.lng;
+        const latitude = item.lat;
+        const name = item.name;
 
-        var iconFeature = new ol.Feature({
+        const iconFeature = new ol.Feature({
             geometry: new ol.geom.Point(ol.proj.transform([longitude, latitude], 'EPSG:4326', 'EPSG:3857')),
         });
 
-        var iconStyle = new ol.style.Style({
+        const iconStyle = new ol.style.Style({
             image: new ol.style.Icon(({
                 anchor: [0.5, 1],
-                src: "http://cdn.mapmarker.io/api/v1/pin?text=P&size=50&hoffset=1"
+                src: 'http://cdn.mapmarker.io/api/v1/pin?text=P&size=50&hoffset=1'
             })),
-            
+
             text: new ol.style.Text({
               text: name,
               font: 'bold 14px serif',
               fill: new ol.style.Fill({
                   color: '#000'
-              })
+              }),
+              backgroundFill:  new ol.style.Fill({
+                color: '#fff'
+            }),
             })
         });
         iconFeature.setStyle(iconStyle);
         features.push(iconFeature);
     }
 
-    var vectorSource = new ol.source.Vector({
-        features: features
+    const vectorSource = new ol.source.Vector({
+        features
     });
 
-    var vectorLayer = new ol.layer.Vector({
+    const vectorLayer = new ol.layer.Vector({
         source: vectorSource
     });
     this.map.addLayer(vectorLayer);
   }
 
   setCenter() {
-    var view = this.map.getView();
+    const view = this.map.getView();
     view.setCenter(ol.proj.fromLonLat([this.longitude, this.latitude]));
     view.setZoom(8);
   }
