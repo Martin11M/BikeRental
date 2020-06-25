@@ -30,13 +30,13 @@
     </div>
     <div class="form-group">
       <label>Phone Number</label>
-      <input type="text" class="form-control" formControlName="number" placeholder="xxx xxx xxx"
+      <input type="text" class="form-control" formControlName="number" placeholder="xxxxxxxxx"
         [ngClass]="{'is-invalid':registrationForm.get('number').touched && registrationForm.get('number').invalid }">
       <div *ngIf="registrationForm.get('number').touched && registrationForm.get('number').errors?.required">
         <p class="invalid-feedback">Phone Number is required!</p>
       </div>
-      <div *ngIf="registrationForm.get('number').errors?.maxlength">
-        <p class="invalid-feedback">The Maximum length of phone number is 11 characters!</p>
+      <div *ngIf="registrationForm.get('number').errors?.maxlength || registrationForm.get('number').errors?.minlength">
+        <p class="invalid-feedback">The length of phone number should be exactly 9 characters!</p>
       </div>
       <div *ngIf="registrationForm.get('number').errors?.pattern">
         <p class="invalid-feedback">Phone number can only contain numbers!</p>
