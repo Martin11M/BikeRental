@@ -1,5 +1,5 @@
 <div class="container text-center">
-    <app-return-bike-rental *ngIf="isRented()"></app-return-bike-rental>
+    <app-return-bike-rental *ngIf="isRented" [rentedStation]="rentedStation" (returnMade)="returnMade($event)"></app-return-bike-rental>
 
     <h1>Available stations</h1>
     <h2 class="pb-4">Total: {{ totalRecords }}</h2>
@@ -33,7 +33,7 @@
         <app-station-available-item style="display: contents;" *ngFor="let station of filteredStations | paginate: {
           id: 'availableStationsTable',
           itemsPerPage: 10,
-          currentPage: page }" [station]="station">
+          currentPage: page }" [station]="station" [isRented]="isRented" [availableBikesCount]="stationAvailableBikesCount[station.stationId]" (rentMade)="rentMade($event)">
         </app-station-available-item>
       </tbody>
     </table>
@@ -49,4 +49,3 @@
       </pagination-controls>
     </div>
   </div>
-  

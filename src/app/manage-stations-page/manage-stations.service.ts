@@ -5,6 +5,8 @@ import { Subject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { environment } from 'src/environments/environment';
+import {map} from "rxjs/operators";
+import {Bike} from "../bikes-subtable/bike";
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +35,21 @@ export class ManageStationsService {
     this.addStationForm.reset(this.initialValues);
     return this.addStationForm;
   }
-  
+
 
   getStations(): Observable<Station[]> {
     return this.http.get<Station[]>(`${this.url}api/stations/getStations`, {headers: this.userService.headers});
+  }
+
+  getAvailableBikesCountForStation(station: Station): Observable<number> {
+    return this.getActiveBikes(station.stationId).pipe(map(bikes => {
+      return bikes.filter(bike => bike.status === 'FREE').length;
+    }));
+  }
+
+  getActiveBikes(stationId: number): Observable<Bike[]> {
+    const getParams = `?stationId=${stationId}`;
+    return this.http.get<Bike[]>(`${this.url}api/bikes${getParams}`, {headers: this.userService.headers}) as Observable<Bike[]>;
   }
 
   addStation(address: string, lat: number, lng: number): Observable<{ code: number, text: string }> {

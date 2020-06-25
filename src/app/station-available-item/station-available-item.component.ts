@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Station } from '../manage-stations-page/station';
-import { AvailableStationsService } from '../rent-page/rental-page.service';
-import { Observable } from 'rxjs';
+import {ManageStationsService} from '../manage-stations-page/manage-stations.service';
+import {RentalService} from '../services/rental.service';
 
 @Component({
   selector: 'app-station-available-item',
@@ -9,17 +9,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./station-available-item.component.scss']
 })
 export class StationAvailableItemComponent implements OnInit {
- 
+  @Input() availableBikesCount = 0;
   @Input() station: Station;
+  @Input() isRented: boolean;
+  @Output() rentMade = new EventEmitter();
 
-  constructor(public availableStationsService: AvailableStationsService) { }
-
-  availableBikes(stationId: number) {
-    return stationId;
-  }
-
-  isRented(){
-    return this.availableStationsService.isRented;
+  constructor(private rentalService: RentalService) {
   }
 
   ngOnInit() {
@@ -27,17 +22,12 @@ export class StationAvailableItemComponent implements OnInit {
 
   rentBike() {
     console.log(`Attempt to rental from station of id ${this.station.stationId}.`);
-    this.availableStationsService.makeRental(this.station.stationId).subscribe( result => {
-      if(result.code === 1) {
-        this.availableStationsService.rentedStation = {
-          id: this.station.stationId,
-          address: this.station.address
-        }
-        this.availableStationsService.isRented = true;
-        this.availableStationsService.availableBikesInStations[this.station.address] -= 1;
-      }
-      else
+    this.rentalService.makeRental(this.station.stationId).subscribe( result => {
+      if (result.code === 1) {
+        this.rentMade.emit(this.station);
+      } else {
         alert(result.text);
+      }
     });
   }
 }
