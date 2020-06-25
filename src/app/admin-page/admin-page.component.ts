@@ -11,7 +11,7 @@ export class AdminPageComponent implements OnInit {
   constructor(private user: UserService) { }
 
   ngOnInit() {
-    console.log('nice!');
+    //console.log('nice!');
   }
 
   get login() {

@@ -34,7 +34,7 @@ export class LoginPageComponent implements OnInit {
     this.loading = true;
     this.loginService.logIn(this.user.username, this.user.password).subscribe((data) => {
       this.user.updateData(data);
-      console.log(this.user.data);
+      //console.log(this.user.data);
       if (data.token.length > 0) {
         data.admin ? this.router.navigate(['/admin-dashboard']) : this.router.navigate(['/user-dashboard']);
         sessionStorage.setItem('isLoggedIn', 'true');

@@ -35,7 +35,7 @@ export class ReturnBikeRentalComponent implements OnInit {
     const returnStationAddress = this.returnStationForm.get('station').value;
     const station = this.allStations.find(s => s.address === returnStationAddress);
     const stationId = station.stationId;
-    console.log(`Attempt to return bike to station of id ${stationId}.`);
+    //console.log(`Attempt to return bike to station of id ${stationId}.`);
     this.rentalService.endRental(stationId).subscribe( result => {
       if (result.code === 1) {
         this.returnMade.emit(station);

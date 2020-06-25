@@ -21,7 +21,7 @@ export class StationAvailableItemComponent implements OnInit {
   }
 
   rentBike() {
-    console.log(`Attempt to rental from station of id ${this.station.stationId}.`);
+    //console.log(`Attempt to rental from station of id ${this.station.stationId}.`);
     this.rentalService.makeRental(this.station.stationId).subscribe( result => {
       if (result.code === 1) {
         this.rentMade.emit(this.station);
