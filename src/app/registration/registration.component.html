@@ -38,9 +38,17 @@
       <div *ngIf="registrationForm.get('number').errors?.maxlength">
         <p class="invalid-feedback">The Maximum length of phone number is 11 characters!</p>
       </div>
+      <div *ngIf="registrationForm.get('number').errors?.pattern">
+        <p class="invalid-feedback">Phone number can only contain numbers!</p>
+      </div>
+    </div>
+    <div *ngIf="accountWasCreated" class="alert alert-success" role="alert">
+      Your account was created! You can log in now. Reditecting...
+    </div>
+    <div *ngIf="errorText.length > 0 && !accountWasCreated" class="alert alert-danger" role="alert">
+      {{ errorText }}
     </div>
     <button [disabled]="!registrationForm.valid" (click)="registerUser()" class="btn btn-primary">Register</button>
   </form>
   <button (click)="logIn()" class="btn btn-secondary helper-btn">Log In</button>
-  <!-- <div *ngIf="error" class="error-text invalid-feedback">Your username or password was entered incorrectly!</div> -->
 </div>
